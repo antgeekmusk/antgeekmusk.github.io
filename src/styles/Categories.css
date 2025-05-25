@@ -1,0 +1,26 @@
+.categories-list {
+    max-height: 50vh; /* Limit height to 50% of the viewport */
+    overflow-y: auto; /* Add vertical scroll if content exceeds max height */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.categories-item {
+    font-size: 16px;
+    margin: 10px 0;
+    transition: background-color 0.1s, color 0.1s; /* Smooth transition for hover effects */
+}
+
+.categories-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 4px; /* Rounded corners for better aesthetics */
+}
+
+.categories-item:hover {
+    color: red ; /* Change font color to red on hover */
+    background-color: #f0f0f0 ; /* Change background to light gray on hover */
+}

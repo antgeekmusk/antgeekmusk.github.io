@@ -18,6 +18,9 @@
     font-size: 15px;
     margin: 0;
 }
+.title-text:hover {
+    cursor: default;
+}
 
 .sidebar-section p {
     margin: 0;

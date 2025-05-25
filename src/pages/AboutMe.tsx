@@ -4,7 +4,7 @@ import { CalendarOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import BlogHeader from '../components/BlogHeader';
 import '../styles/AboutMe.css';
-import BackToTopButton from "../components/BackToTopButton";
+import FloatButtonTools from "../components/FloatButtonTools";
 import BlogFooter from "../components/BlogFooter";
 import {getTagColor} from "../utils/common";
 const { Content } = Layout;
@@ -131,7 +131,7 @@ const AboutMe: React.FC = () => {
                     </Timeline>
                 </div>
             </Content>
-            <BackToTopButton/>
+            <FloatButtonTools/>
             <BlogFooter/>
         </Layout>
     );

@@ -1,7 +1,9 @@
 import React from 'react';
-import HomePage from "./pages/HomePage";
 import AppRouter from "./AppRouter";
+import Cursor from "./components/Cursor/Cursor";
 const App: React.FC = () => (
-    <AppRouter />
+    <div>
+        <AppRouter />
+    </div>
 );
 export default App;

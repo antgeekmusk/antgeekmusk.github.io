@@ -5,7 +5,7 @@ import BlogFooter from "../components/BlogFooter";
 import '../styles/HomePage.css'
 import BlogList from "../components/BlogList";
 import Sidebar from "../components/Sidebar";
-import BackToTopButton from '../components/BackToTopButton';
+import FloatButtonTools from '../components/FloatButtonTools';
 
 const { Content } = Layout;
 
@@ -39,7 +39,7 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
                         </div>
                     </Content>
                 </Layout>
-                <BackToTopButton />
+                <FloatButtonTools BackTopButton={true} />
                 <BlogFooter />
             </Layout>
         </Flex>

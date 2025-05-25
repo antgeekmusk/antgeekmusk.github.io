@@ -6,136 +6,80 @@ import { getTagColor } from '../utils/common';
 
 const BlogList: React.FC = () => {
     const navigate = useNavigate();
+    const [blogs,setBlogs] = useState<any[]>([]);
 
-    const blogs = [
-        {
-            id: 1,
-            title: 'Blog Title 1BlogBlog Title 1BlogBlog Title 1BlogBlog Title 1Blog',
-            description: 'This is a short description of blog 1.This is a short description of blog 1.This is a short description of blog 1.This is a short description of blog 1.',
-            date: '2023-10-01',
-            tags: ['React', 'JavaScript', 'Java', 'Node', 'Python'],
-            image: '/images/blog/logo.png'
-        },
-        {
-            id: 2,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS']
-        },
-        {
-            id: 3,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: '/images/blog/logo-white.png'
-        },
-        {
-            id: 4,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 5,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 6,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 7,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 8,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 9,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 10,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 11,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 12,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-        {
-            id: 13,
-            title: 'Blog Title 2',
-            description: 'This is a short description of blog 2.',
-            date: '2023-10-02',
-            tags: ['TypeScript', 'CSS'],
-            image: 'path/to/image2.jpg'
-        },
-    ];
+    // 获取到博客配置信息
+    useEffect(() => {
+        fetch('/data/blog/blogs_config.json')
+            .then(resp => resp.json())
+            .then(data => {
+                setBlogs(data)
+            })
+    }, []);
 
-
-
-    const handleBlogClick = (id: number) => {
-        navigate(`/blog/${id}`);
+    const handleBlogClick = (blog: any) => {
+        navigate(`/blog${blog.path.replace('.md','')}`,{state: {blog}});
     };
 
-
+    const processTitle = (title:string) => {
+        if (title.length > 10){
+            return (
+                <>
+                {title.slice(0,10)}
+                    <br/>
+                {
+                    title.slice(10).length>12 ? `${title.slice(10)}...` : title.slice(10)
+                }
+                </>
+            )
+        } else {
+            return title;
+        }
+    }
 
     return (
         <div className="blog-list">
             {blogs.map((blog) => (
-                <div key={blog.id} className="blog-item" onClick={() => handleBlogClick(blog.id)}>
-                    {blog.image && (
-                        <div className="blog-image" style={{backgroundImage: `url(${blog.image})`,minWidth: '30%'}}></div>
-                    )}
+                <div key={blog.id} className="blog-item" onClick={() => handleBlogClick(blog)}>
+                    {/*列表元素简略图*/}
+                    <div className="blog-image-container">
+                        {blog.image ? (
+                            <div className="blog-image" style={{ backgroundImage: `url(${blog.image})` }}></div>
+                        ) : (
+                            <div
+                                className="blog-image-text"
+                                style={{
+                                    backgroundColor: '#e6f7ff',
+                                    color: '#1890ff',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    textAlign: 'center',
+                                    borderRadius: '5px',
+                                    boxSizing: 'border-box',
+                                    overflow: 'hidden',
+                                    wordBreak: 'break-word',
+                                    fontSize: '1.2rem',
+                                }}
+                            >
+                                {processTitle(blog.image_text)}
+                            </div>
+                        )}
+                    </div>
                     <div className="blog-content">
                         <h2>{blog.title}</h2>
                         <div className="blog-meta">
-                            <p className="blog-date">发表于 : {blog.date}</p>
+                            <span >发表于 : {blog.date}</span>
+                            <div>
+                                <span>专栏 :  </span>
+                                {blog.columns.map((column: string) => (
+                                    <Tag className={"blog-meta-tag"} key={column} color={getTagColor(column)}>{column}</Tag>
+                                ))}
+                            </div>
                             <div className="blog-tags">
                                 <span>标签 : </span>
-                                {blog.tags.map((tag) => (
-                                    <Tag key={tag} color={getTagColor(tag)}>
+                                {blog.tags.map((tag: string) => (
+                                    <Tag className={"blog-meta-tag"} key={tag} color={getTagColor(tag)}>
                                         {tag}
                                     </Tag>
                                 ))}

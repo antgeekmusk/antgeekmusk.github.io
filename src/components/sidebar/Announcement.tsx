@@ -1,10 +1,6 @@
 import React from 'react';
-import { SoundOutlined, createFromIconfontCN } from '@ant-design/icons';
 import '../../styles/Announcement.css';
-
-const IconFont = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/c/font_4795396_zy1t4aw9fd.js',
-});
+import IconFont from "../Icon/IconFont";
 
 const Announcement: React.FC = () => {
     return (

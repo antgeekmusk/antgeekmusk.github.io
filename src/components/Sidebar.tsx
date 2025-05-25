@@ -6,13 +6,30 @@ import Categories from './sidebar/Categories';
 import Tags from './sidebar/Tags';
 import Archives from './sidebar/Archives';
 import SiteInfo from './sidebar/SiteInfo';
+import StickyWrapper from "./sidebar/StickyWrapper";
+interface OutlineItem {
+    level: number;
+    text: string;
+}
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+    outline?: OutlineItem[];
+}
+const Sidebar: React.FC<SidebarProps> = ({ outline }) => {
     return (
         <div className="sidebar">
-            <Announcement />
+            {/*公告*/}
+                <Announcement />
+            {/*文章大纲*/}
+            {outline &&
+                <StickyWrapper>
+                    <Categories outline={outline}/>
+                </StickyWrapper>
+            }
+
+
+
             {/*<LatestArticles />*/}
-            {/*<Categories />*/}
             {/*<Tags />*/}
             {/*<Archives />*/}
             {/*<SiteInfo />*/}

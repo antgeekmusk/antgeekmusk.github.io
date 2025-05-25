@@ -3,6 +3,7 @@
     flex-direction: column;
     background: none;
     margin-top: 20px;
+    height: 100%;
 }
 
 .sidebar-section {
@@ -38,6 +39,11 @@
 .sidebar-section:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sticky {
+    position: sticky ;
+    z-index: 10; /* Ensure it stays above other content */
 }
 
 @media (max-width: 768px) {

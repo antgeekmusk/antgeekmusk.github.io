@@ -1,11 +1,13 @@
 import React from 'react';
 import { Layout } from 'antd';
 import {URL} from "../common/GlobleConfig"
+import {rgba} from "framer-motion";
 const { Footer: Footer} = Layout;
 const footerStyle: React.CSSProperties = {
     textAlign: 'center',
     color: 'black',
-    backgroundColor: '#f3f3f3',
+    backgroundColor: 'rgb(242,242,242)',
+
 };
 const BlogFooter: React.FC = () => {
     return (
