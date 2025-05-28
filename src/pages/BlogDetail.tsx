@@ -71,6 +71,7 @@ const BlogDetail: React.FC = () => {
         return outline;
     };
 
+
     // 获取文章的唯一标识
     const getBlogStorageId = (blogId: string ,blogDate: string) => {
         return `blogStorageId-${blogId}-${blogDate}`;
@@ -86,7 +87,19 @@ const BlogDetail: React.FC = () => {
         if (savedBlog) {
             setBlog(JSON.parse(savedBlog)); // 从 localStorage 恢复数据
         } else {
-            console.warn('No blog data found');
+            fetch('/data/blog/blogs_config.json')
+                .then(resp => resp.json())
+                .then(data => {
+                    // 查找匹配的博客
+                    data.forEach((blog: any) => {
+                        if(blog['id'] == id){
+                            console.log('setBlog',blog)
+                            setBlog(blog);
+                            localStorage.setItem(getBlogStorageId(id ?? '',date ?? ''), JSON.stringify(blog)); // 存储到 localStorage
+                        }
+                    })
+                })
+
         }
     }
     }, [location.state]);

@@ -32,6 +32,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ className, children, ...props }) 
     };
 
     return (
+        className ? (
         <div
             style={{
                 position: 'relative',
@@ -69,6 +70,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ className, children, ...props }) 
                 复制
             </button>
         </div>
+            ) : (
+                <strong>{children}</strong>
+            )
     );
 };
 

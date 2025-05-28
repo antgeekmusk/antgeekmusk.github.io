@@ -3,7 +3,13 @@ import re
 import requests
 from urllib.parse import urlparse
 
+
 def download_images_from_markdown(file_path):
+    """
+    将网络路径转换成本地路径
+    :param file_path:
+    :return:
+    """
     # Ensure the file exists
     if not os.path.isfile(file_path):
         print(f"File not found: {file_path}")
@@ -51,6 +57,63 @@ def download_images_from_markdown(file_path):
         file.write(content)
     print(f"Updated Markdown file: {file_path}")
 
+
+def remove_font_tags_from_markdown(file_path):
+    """
+    去除 Markdown 文件中的 <font> 标签
+    :param file_path: Markdown 文件路径
+    """
+    # Ensure the file exists
+    if not os.path.isfile(file_path):
+        print(f"File not found: {file_path}")
+        return
+
+    # Read the Markdown file
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+
+    # Regex to remove <font> tags and their attributes
+    content = re.sub(r'<font[^>]*>', '', content)  # Remove opening <font> tags
+    content = re.sub(r'</font>', '', content)  # Remove closing </font> tags
+
+    # Write the updated content back to the Markdown file
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(content)
+
+    print(f"Removed <font> tags from: {file_path}")
+
+
+def remove_irregular_format(file_path):
+    """
+    去除 Markdown 文件中的不规则格式
+    :param file_path: Markdown 文件路径
+    """
+    # Ensure the file exists
+    if not os.path.isfile(file_path):
+        print(f"File not found: {file_path}")
+        return
+
+    # Read the Markdown file
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+    content = content.replace(',**', '**,')  # Replace "****" with "** **"
+    content = content.replace('** ', '**')  # Replace "****" with "** **"
+    content = content.replace(' **', '**')  # Replace "** **" with "**"
+    content = content.replace('****', '** **')  # Replace "****" with "** **"
+
+
+    # Write the updated content back to the Markdown file
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(content)
+
+    print(f"Removed irregular formats from: {file_path}")
+
+
 if __name__ == '__main__':
     pass
-    download_images_from_markdown('/Users/fujunhua/IdeaProjects/antgeekmusk.github.io/public/data/blog/content/20250521/2/Hive 表类型.md')
+    file_path = '/Users/fujunhua/IdeaProjects/antgeekmusk.github.io/public/data/blog/content/20250521/1/Hive 小文件问题.md'
+    # 将图片的网络路径转换成本地路径
+    # download_images_from_markdown(file_path)
+    # 去除 Markdown 文件中的 <font> 标签
+    # remove_font_tags_from_markdown(file_path)
+    remove_irregular_format(file_path)

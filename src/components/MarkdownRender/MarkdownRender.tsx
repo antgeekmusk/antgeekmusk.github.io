@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import 'highlight.js/styles/atom-one-dark.css';
 import CodeBlock from "./CodeBlock";
 import remarkGfm from 'remark-gfm'; // 引入 GFM 插件
+import rehypeRaw from 'rehype-raw';
 interface MarkdownRenderProps {
     markdown: string; // Define the type of the markdown prop
 }
 
 const MarkdownRender : React.FC<MarkdownRenderProps> = ({ markdown }) => {
     const getImgSrc = (src?: string) => {
-        console.log('src',src)
         // 获取当前页面的path
         const path = window.location.pathname.split('/').slice(2,-1).join('/');
         console.log('path',path)
@@ -64,11 +64,12 @@ const MarkdownRender : React.FC<MarkdownRenderProps> = ({ markdown }) => {
         ),
 
 
+
     };
 
     return (
         <ReactMarkdown
-            rehypePlugins={[rehypeHighlight,remarkGfm]}  // 使用 rehype-highlight 插件
+            rehypePlugins={[rehypeHighlight,rehypeRaw,remarkGfm]}  // 使用 rehype-highlight 插件
             children={markdown}
             components={components}
         />
