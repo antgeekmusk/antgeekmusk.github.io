@@ -18,5 +18,15 @@
     "columns": ["大数据","Hive"],
     "tags": ["Hive"],
     "image_text" : "Hive map和reduce的任务数量如何控制"
+  },
+  {
+    "id": 3,
+    "path": "/20250528/3/Hive 文件存储格式和压缩格式.md",
+    "title": "Hive 文件存储格式和压缩格式",
+    "description": "Hive 文件存储格式和压缩格式",
+    "date": "2025-05-28",
+    "columns": ["大数据","Hive"],
+    "tags": ["Hive"],
+    "image_text" : "Hive 文件存储格式和压缩格式"
   }
 ]
