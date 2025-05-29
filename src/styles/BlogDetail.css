@@ -1,4 +1,5 @@
 .blog-detail {
+    width: 75%;
     min-width: 100vw;
     min-height: 100vh;
 }

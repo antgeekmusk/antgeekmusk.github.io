@@ -7,6 +7,8 @@ import Tags from './sidebar/Tags';
 import Archives from './sidebar/Archives';
 import SiteInfo from './sidebar/SiteInfo';
 import StickyWrapper from "./sidebar/StickyWrapper";
+import GitHubCalendar from "react-github-calendar";
+import MyGithubCalendar from "./GithubCalendar/MyGithubCalendar";
 interface OutlineItem {
     level: number;
     text: string;
@@ -14,8 +16,9 @@ interface OutlineItem {
 
 interface SidebarProps {
     outline?: OutlineItem[];
+    showGithubCalender?: boolean;
 }
-const Sidebar: React.FC<SidebarProps> = ({ outline }) => {
+const Sidebar: React.FC<SidebarProps> = ({ outline ,showGithubCalender=false}) => {
     return (
         <div className="sidebar">
             {/*公告*/}
@@ -26,6 +29,12 @@ const Sidebar: React.FC<SidebarProps> = ({ outline }) => {
                     <Categories outline={outline}/>
                 </StickyWrapper>
             }
+            {/*github 日历*/}
+            {showGithubCalender &&
+                <MyGithubCalendar />
+            }
+
+            {/*最新文章*/}
 
 
 

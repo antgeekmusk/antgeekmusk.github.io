@@ -13,7 +13,6 @@ const MarkdownRender : React.FC<MarkdownRenderProps> = ({ markdown }) => {
     const getImgSrc = (src?: string) => {
         // 获取当前页面的path
         const path = window.location.pathname.split('/').slice(2,-1).join('/');
-        console.log('path',path)
         const bath = '/data/blog/content/'
         return bath+path+'/'+src
     }
@@ -55,13 +54,45 @@ const MarkdownRender : React.FC<MarkdownRenderProps> = ({ markdown }) => {
             </a>
         ),
         img: ({ src, alt, ...props }) => (
-            <img src={getImgSrc(src)} alt={alt} style={{ display: "inline-block" }}></img>
+            <img
+                src={getImgSrc(src)}
+                alt={alt}
+                style={{ display: "inline-block" , maxWidth: "100%", height: "auto", margin: "10px 0" }}
+            >
+            </img>
         ),
         blockquote: ({ children, ...props }) => (
             <blockquote style={{ borderLeft: "4px solid #ccc", padding: "0 1em", color: "#666",margin: 0 }} {...props}>
                 {children}
             </blockquote>
         ),
+        table: ({ children, ...props }) => (
+                <table style={{ borderCollapse: "collapse", width: "100%", margin: "20px 0" }} {...props}>
+                    {children}
+                </table>
+        ),
+        thead: ({ children, ...props }) => (
+            <thead style={{ backgroundColor: "#f5f5f5", textAlign: "left" }} {...props}>
+            {children}
+            </thead>
+        ),
+        tbody: ({ children, ...props }) => <tbody {...props}>{children}</tbody>,
+        tr: ({ children, ...props }) => (
+            <tr style={{ borderBottom: "1px solid #ddd" }} {...props}>
+                {children}
+            </tr>
+        ),
+        th: ({ children, ...props }) => (
+            <th style={{ padding: "8px", fontWeight: "bold", border: "1px solid #ddd" }} {...props}>
+                {children}
+            </th>
+        ),
+        td: ({ children, ...props }) => (
+            <td style={{ padding: "8px", border: "1px solid #ddd" }} {...props}>
+                {children}
+            </td>
+        ),
+
 
 
 

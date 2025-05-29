@@ -82,7 +82,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
                 >
                     <div
                         className={"h-left-logo"}
-                        style={{backgroundImage: `url(${process.env.PUBLIC_URL}/${logoImage})`}}
+                        style={{backgroundImage: `url(/${logoImage})`}}
                         >
                     </div>
                     <div

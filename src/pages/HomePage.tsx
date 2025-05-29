@@ -35,7 +35,7 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
                     <Content className={"homepage-content"}>
                         <div className="content-container">
                             <BlogList />
-                            <Sidebar />
+                            <Sidebar showGithubCalender={true}/>
                         </div>
                     </Content>
                 </Layout>

@@ -93,7 +93,6 @@ const BlogDetail: React.FC = () => {
                     // 查找匹配的博客
                     data.forEach((blog: any) => {
                         if(blog['id'] == id){
-                            console.log('setBlog',blog)
                             setBlog(blog);
                             localStorage.setItem(getBlogStorageId(id ?? '',date ?? ''), JSON.stringify(blog)); // 存储到 localStorage
                         }
@@ -190,9 +189,7 @@ const BlogDetail: React.FC = () => {
                 }
                 {
                     isSidebarVisible &&
-                    <div className="blog-sidebar">
-                        <Sidebar outline={outline}/>
-                    </div>
+                    <Sidebar outline={outline} />
                 }
             </Content>
             {/*返回顶部按钮*/}

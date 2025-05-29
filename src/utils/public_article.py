@@ -96,10 +96,11 @@ def remove_irregular_format(file_path):
     # Read the Markdown file
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
-    content = content.replace(',**', '**,')  # Replace "****" with "** **"
-    content = content.replace('** ', '**')  # Replace "****" with "** **"
-    content = content.replace(' **', '**')  # Replace "** **" with "**"
-    content = content.replace('****', '** **')  # Replace "****" with "** **"
+    content = re.sub(r'\*\*,(.*?)\*\*', r',**\1**', content)
+    content = re.sub(r'\*\*(.*?),\*\*', r'**\1**', content)
+    content = content.replace('** ', '**')
+    content = content.replace(' **', '**')
+    content = content.replace('****', '** **')
 
 
     # Write the updated content back to the Markdown file
@@ -108,12 +109,18 @@ def remove_irregular_format(file_path):
 
     print(f"Removed irregular formats from: {file_path}")
 
+def run(file_path):
+    """
+    主函数，执行所有操作
+    """
+    # 将图片的网络路径转换成本地路径
+    download_images_from_markdown(file_path)
+    # 去除 Markdown 文件中的 <font> 标签
+    remove_font_tags_from_markdown(file_path)
+    # 去除 Markdown 文件中的不规则格式
+    remove_irregular_format(file_path)
 
 if __name__ == '__main__':
     pass
-    file_path = '/Users/fujunhua/IdeaProjects/antgeekmusk.github.io/public/data/blog/content/20250521/1/Hive 小文件问题.md'
-    # 将图片的网络路径转换成本地路径
-    # download_images_from_markdown(file_path)
-    # 去除 Markdown 文件中的 <font> 标签
-    # remove_font_tags_from_markdown(file_path)
-    remove_irregular_format(file_path)
+    file_path = '/src/public/data/blog/content/20250528/3/Hive 文件存储格式和压缩格式.md'
+    run(file_path)
