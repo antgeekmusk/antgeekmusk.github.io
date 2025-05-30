@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../styles/Announcement.css';
-import IconFont from "../Icon/IconFont";
+import '../../../styles/Announcement.css';
+import IconFont from "../../Icon/IconFont";
 
 const Announcement: React.FC = () => {
     return (
@@ -10,7 +10,8 @@ const Announcement: React.FC = () => {
                 <span className="title-text">公告</span>
             </div>
             <p>网站建设中.....</p>
-        </div>);
+        </div>
+    );
 };
 
 export default Announcement;

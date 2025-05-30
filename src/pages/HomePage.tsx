@@ -4,8 +4,11 @@ import BlogHeader from "../components/BlogHeader";
 import BlogFooter from "../components/BlogFooter";
 import '../styles/HomePage.css'
 import BlogList from "../components/BlogList";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import FloatButtonTools from '../components/FloatButtonTools';
+import Announcement from "../components/Sidebar/item/Announcement";
+import MyGithubCalendar from "../components/GithubCalendar/MyGithubCalendar";
+import SidebarColumn from "../components/Sidebar/item/SidebarColumn";
 
 const { Content } = Layout;
 
@@ -35,7 +38,13 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
                     <Content className={"homepage-content"}>
                         <div className="content-container">
                             <BlogList />
-                            <Sidebar showGithubCalender={true}/>
+                            <Sidebar
+                                components={[
+                                    { component: <Announcement />, sticky: false , order: 1},
+                                    { component: <MyGithubCalendar />, sticky: false, order: 2 },
+                                    { component: <SidebarColumn />, sticky: true ,order: 3},
+                                ]}
+                            />
                         </div>
                     </Content>
                 </Layout>

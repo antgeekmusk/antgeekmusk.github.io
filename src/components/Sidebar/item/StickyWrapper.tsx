@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../../styles/Sidebar.css';
+import '../../../styles/Sidebar.css';
 
 interface StickyWrapperProps {
     children: React.ReactNode;

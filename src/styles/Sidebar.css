@@ -3,13 +3,13 @@
     flex-direction: column;
     background: none;
     margin-top: 20px;
-    height: 100%;
     max-width: 30%;
 }
+
 .sidebar-section {
     width: 100%;
     margin-top: 0px;
-    margin-bottom: 20px; /* Add margin to separate sections */
+    margin-bottom: 20px;
     padding: 20px;
     background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -42,9 +42,9 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.sticky {
-    position: sticky ;
-    z-index: 10; /* Ensure it stays above other content */
+.sidebar-section.no-hover:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 @media (max-width: 768px) {

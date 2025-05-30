@@ -8,13 +8,16 @@ import remarkParse from 'remark-parse';
 import { visit } from 'unist-util-visit';
 import FloatButtonTools from "../components/FloatButtonTools";
 import BlogFooter from "../components/BlogFooter";
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/Sidebar/Sidebar';
 import { useLocation } from 'react-router-dom';
 import {getTagColor} from "../utils/common";
 import MarkdownRender from "../components/MarkdownRender/MarkdownRender";
 import { Button, Drawer } from 'antd';
 import Loading from "../components/Loading/Loading";
-import Categories from "../components/sidebar/Categories";
+import Categories from "../components/Sidebar/item/Categories";
+import Announcement from '../components/Sidebar/item/Announcement';
+import MyGithubCalendar from "../components/GithubCalendar/MyGithubCalendar";
+import SidebarColumn from "../components/Sidebar/item/SidebarColumn";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -145,6 +148,11 @@ const BlogDetail: React.FC = () => {
         return { wordCount, readTime };
     };
 
+    // 页面加载时滚动到顶部
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
 
     return (
         <Layout className={"blog-detail"}>
@@ -175,9 +183,9 @@ const BlogDetail: React.FC = () => {
                             阅读字数: {wordCount} 字 | 预估阅读时间: {readTime} 分钟
                         </div>
 
-                        {isMobileDevice ? (<Categories outline={outline} showTitleBar={false} />) : null}
 
                         <div className="blog-body">
+                            <Categories outline={outline} isDetailOutline={true} />
                             <MarkdownRender markdown={content}/>
                         </div>
                     </div>
@@ -187,9 +195,18 @@ const BlogDetail: React.FC = () => {
                     </div>
                 )
                 }
+
                 {
                     isSidebarVisible &&
-                    <Sidebar outline={outline} />
+                    <Sidebar
+                        components={[
+                            { component: <Announcement />, sticky: false,order: 1 },
+                            { component: <SidebarColumn />, sticky: false, order: 3 },
+                            { component: <Categories outline={outline} isDetailOutline={false} />, sticky: true, order: 4 },
+                            { component: <MyGithubCalendar />, sticky: false, order: 5 },
+
+                        ]}
+                    />
                 }
             </Content>
             {/*返回顶部按钮*/}
