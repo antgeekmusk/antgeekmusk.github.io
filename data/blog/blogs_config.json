@@ -5,8 +5,8 @@
     "title": "超详细Hive小文件问题介绍及解决方案",
     "description": "Hive小文件问题介绍及解决方案",
     "date": "2025-05-21",
-    "columns": ["大数据","Hive","小文件问题"],
-    "tags": ["Hive"],
+    "columns": ["Hive"],
+    "tags": ["Hive","小文件问题"],
     "image_text" : "超详细Hive小文件问题介绍及解决方案"
   },
   {
@@ -15,7 +15,7 @@
     "title": "Hive map和reduce的任务数量如何控制",
     "description": "Hive map和reduce的任务数量如何控制",
     "date": "2025-05-26",
-    "columns": ["大数据","Hive"],
+    "columns": ["大数据"],
     "tags": ["Hive"],
     "image_text" : "Hive map和reduce的任务数量如何控制"
   },
@@ -25,8 +25,18 @@
     "title": "Hive 文件存储格式和压缩格式",
     "description": "Hive 文件存储格式和压缩格式",
     "date": "2025-05-28",
-    "columns": ["大数据","Hive"],
+    "columns": ["Hive"],
     "tags": ["Hive"],
     "image_text" : "Hive 文件存储格式和压缩格式"
+  },
+  {
+    "id": 4,
+    "path": "/20250530/4/Hive 数据倾斜问题.md",
+    "title": "Hive 数据倾斜问题",
+    "description": "Hive 数据倾斜问题",
+    "date": "2025-05-30",
+    "columns": ["Hive"],
+    "tags": ["Hive"],
+    "image_text" : "Hive 数据倾斜问题"
   }
 ]
