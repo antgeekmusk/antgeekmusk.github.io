@@ -11,7 +11,7 @@
 
 在map端由于某些文件不可拆分,导致了所有的数据只能放到一个map task,比如文件格式是textfile,压缩是Gzip.
 
-(这里需要注意的是,是否可切分不是单纯的压缩格式或者文件格式决定的,比如orc,它的几种压缩格式都是不可以拆分的,但是orc这种文件格式的机制使得它是可以拆分的,所以最终还是可以拆分的,具体是否可以拆分可以看作者的另外一篇文章 : [Hive 文件存储格式和压缩格式](https://www.yuque.com/antgcode/ry5al9/tcgxl1uyuasvr7g9))
+(这里需要注意的是,是否可切分不是单纯的压缩格式或者文件格式决定的,比如orc,它的几种压缩格式都是不可以拆分的,但是orc这种文件格式的机制使得它是可以拆分的,所以最终还是可以拆分的,具体是否可以拆分可以看作者的另外一篇文章 : [Hive 文件存储格式和压缩格式](https://antgeekmusk.github.io/blog/20250528/3/Hive%20%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F%E5%92%8C%E5%8E%8B%E7%BC%A9%E6%A0%BC%E5%BC%8F))
 
 解决方案 : 
 
@@ -41,7 +41,7 @@ set mapred.min.split.size.per.rack=100000000; -- 100M
 -- 即单个节点上会向着100M这个大小合并,如果不到就暂存起来,不同机架和节点用这些暂存的碎片朝着目标合并,向100M靠近
 ```
 
-可以看作者的另外一篇文章 :[ Hive 小文件问题](https://www.yuque.com/antgcode/ry5al9/zewv3y31a6gzto88)
+可以看作者的另外一篇文章 :[ Hive 小文件问题](https://antgeekmusk.github.io/blog/20250521/1/Hive%20%E5%B0%8F%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98)
 
 
 
