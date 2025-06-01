@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useLayoutEffect} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams, redirect, LoaderFunctionArgs} from 'react-router-dom';
 import { Layout, Tag, Typography } from 'antd';
 import BlogHeader from '../components/BlogHeader';
 import '../styles/BlogDetail.css';
@@ -27,6 +27,7 @@ interface OutlineItem {
     text: string;
 }
 
+
 const BlogDetail: React.FC = () => {
     const { id,date } = useParams<{ id: string,date: string }>();
     const location = useLocation();
@@ -44,7 +45,7 @@ const BlogDetail: React.FC = () => {
     const [readTime, setReadTime] = useState(0);
     // 是否是手机端
     const [isMobileDevice, setIsMobileDevice] = useState(false);
-    const navigate = useNavigate();
+
 
 
     // 判断是否是手机端
@@ -80,25 +81,25 @@ const BlogDetail: React.FC = () => {
         return `blogStorageId-${blogId}-${blogDate}`;
     }
 
-    // 非法路径拦截
-    useLayoutEffect(() => {
-        fetch('/data/blog/blogs_config.json')
-            .then(resp => resp.json())
-            .then(data => {
-                const matchedBlog = data.find((b: any) => {
-                    const pathSegments = b.path.split('/'); // Split the path by '/'
-                    const extractedDate = pathSegments[1]; // Extract the date (second segment)
-                    const extractedId = pathSegments[2]; // Extract the id (third segment)
-                    return extractedDate === date && extractedId === id; // Match with URL params
-                });
-                if(!matchedBlog){
-                    navigate('/404')
-                }
-            })
-            .catch(e => {
-                navigate('/404')
-            })
-    }, [id,date]);
+    // // 非法路径拦截
+    // useLayoutEffect(() => {
+    //     fetch('/data/blog/blogs_config.json')
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             const matchedBlog = data.find((b: any) => {
+    //                 const pathSegments = b.path.split('/'); // Split the path by '/'
+    //                 const extractedDate = pathSegments[1]; // Extract the date (second segment)
+    //                 const extractedId = pathSegments[2]; // Extract the id (third segment)
+    //                 return extractedDate === date && extractedId === id; // Match with URL params
+    //             });
+    //             if(!matchedBlog){
+    //                 navigate('/404')
+    //             }
+    //         })
+    //         .catch(e => {
+    //             navigate('/404')
+    //         })
+    // }, [id,date]);
 
     // 存储列表页传来的blog参数
     useEffect(() => {

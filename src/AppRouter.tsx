@@ -1,20 +1,39 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import BlogDetail from './pages/BlogDetail';
+// AppRouter.jsx
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutMe from "./pages/AboutMe";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import BlogDetail from './pages/BlogDetail';
+import { blogLoader } from './loaders/BlogLoader';
 
-const AppRouter: React.FC = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/blog/:date/:id" element={<BlogDetail />} />
-            <Route path="/AboutMe" element={<AboutMe />} />
-            <Route path="/404" element={<PageNotFound />} />
-            <Route path="*" element={<PageNotFound />} />
-        </Routes>
-    );
+
+// 1. 使用createBrowserRouter替代Routes
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <HomePage />,
+    },
+    {
+        path: "/blog/:date/:id",
+        loader: blogLoader,
+        element: <BlogDetail />,
+    },
+    {
+        path: "/AboutMe",
+        element: <AboutMe />,
+    },
+    {
+        path: "/404",
+        element: <PageNotFound />,
+    },
+    {
+        path: "*",
+        element: <PageNotFound />,
+    },
+]);
+
+const AppRouter = () => {
+    return <RouterProvider router={router} />;
 };
 
 export default AppRouter;
