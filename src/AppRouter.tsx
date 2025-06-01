@@ -9,8 +9,9 @@ const AppRouter: React.FC = () => {
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/blog/:date/:id/:name" element={<BlogDetail />} />
+            <Route path="/blog/:date/:id" element={<BlogDetail />} />
             <Route path="/AboutMe" element={<AboutMe />} />
+            <Route path="/404" element={<PageNotFound />} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     );

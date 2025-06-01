@@ -18,7 +18,8 @@ const BlogList: React.FC = () => {
     }, []);
 
     const handleBlogClick = (blog: any) => {
-        navigate(`/blog${blog.path.replace('.md','')}`,{state: {blog}});
+        const blogPathPrefix = blog.path.split('/').slice(0, 3).join('/');
+        navigate(`/blog${blogPathPrefix}`,{state: {blog}});
     };
 
     const processTitle = (title:string) => {
