@@ -11,24 +11,24 @@ import { blogLoader } from './loaders/BlogLoader';
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage />,
+        element: <HomePage />, // 首页
     },
     {
         path: "/blog/:date/:id",
         loader: blogLoader,
-        element: <BlogDetail />,
+        element: <BlogDetail />, // 文章详情页
     },
     {
         path: "/AboutMe",
-        element: <AboutMe />,
+        element: <AboutMe />, // 关于我页面
     },
     {
         path: "/404",
-        element: <PageNotFound />,
+        element: <PageNotFound />, // 404页面
     },
     {
         path: "*",
-        element: <PageNotFound />,
+        element: <PageNotFound />, // 捕获所有未匹配的路径
     },
 ]);
 
