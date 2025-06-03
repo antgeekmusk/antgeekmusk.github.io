@@ -3,8 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/BlogList.css';
 import { Tag } from 'antd';
 import { getTagColor } from '../utils/common';
+interface BlogListProps {
+    columnName?:string
+}
 
-const BlogList: React.FC = () => {
+interface Blog {
+    id: string;
+    path: string;
+    image?: string;
+    image_text?: string;
+    title: string;
+    date: string;
+    columns: string[];
+    tags: string[];
+    description: string;
+}
+const BlogList: React.FC<BlogListProps> = ({columnName = ''}) => {
     const navigate = useNavigate();
     const [blogs,setBlogs] = useState<any[]>([]);
 
@@ -12,8 +26,13 @@ const BlogList: React.FC = () => {
     useEffect(() => {
         fetch('/data/blog/blogs_config.json')
             .then(resp => resp.json())
-            .then(data => {
+            .then((data:Blog[]) => {
+                // 判断是否有筛选
+                if(columnName){
+                    data = data.filter(blog => blog.columns.includes(columnName));
+                }
                 setBlogs(data)
+
             })
     }, []);
 

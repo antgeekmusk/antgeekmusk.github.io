@@ -9,6 +9,7 @@ import FloatButtonTools from '../components/FloatButtonTools';
 import Announcement from "../components/Sidebar/item/Announcement";
 import MyGithubCalendar from "../components/GithubCalendar/MyGithubCalendar";
 import SidebarColumn from "../components/Sidebar/item/SidebarColumn";
+import {useParams} from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -24,6 +25,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({}) => {
+    const params = useParams<{columnName:string}>();
     return (
         <Flex gap="middle" wrap>
             <Layout style={layoutStyle}>
@@ -37,7 +39,7 @@ const HomePage: React.FC<HomePageProps> = ({}) => {
                     </Content>
                     <Content className={"homepage-content"}>
                         <div className="content-container">
-                            <BlogList />
+                            <BlogList key={params.columnName} columnName={params.columnName}/>
                             <Sidebar
                                 components={[
                                     { component: <Announcement />, sticky: false , order: 1},

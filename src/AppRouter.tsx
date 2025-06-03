@@ -14,6 +14,10 @@ const router = createBrowserRouter([
         element: <HomePage />, // 首页
     },
     {
+        path: "/column/:columnName",
+        element: <HomePage />, // 查看某些专栏的数据
+    },
+    {
         path: "/blog/:date/:id",
         loader: blogLoader,
         element: <BlogDetail />, // 文章详情页

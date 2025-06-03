@@ -3,6 +3,7 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import IconFont from "../../Icon/IconFont";
+import {useNavigate} from "react-router-dom";
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -10,6 +11,7 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const SidebarColumn: React.FC = () => {
         const [items, setItems] = useState<MenuItem[]>([]);
+        const navigate = useNavigate();
         // 获取专栏数据
         useEffect(() => {
             fetch('/data/blog/blogs_config.json')
@@ -65,7 +67,7 @@ const SidebarColumn: React.FC = () => {
                 })
         }, []);
     const onClick: MenuProps['onClick'] = (e) => {
-        console.log('click ', e);
+        navigate("/column/"+e.key);
     };
 
     return (
