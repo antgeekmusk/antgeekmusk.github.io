@@ -38,5 +38,15 @@
     "columns": ["Hive"],
     "tags": ["Hive"],
     "image_text" : "Hive 数据倾斜问题"
+  },
+  {
+    "id": 5,
+    "path": "/20250605/5/Hive 函数大全.md",
+    "title": "Hive 函数大全",
+    "description": "Hive 函数大全",
+    "date": "2025-06-05",
+    "columns": ["Hive"],
+    "tags": ["Hive"],
+    "image_text" : "Hive 函数大全"
   }
 ]
