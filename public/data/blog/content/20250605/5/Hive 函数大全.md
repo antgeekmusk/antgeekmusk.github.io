@@ -563,7 +563,7 @@ abc
 
 
 ## 获取字符ASCII码
-ascii : 获取字符串首个字符ascii码([ascii码表](https://www.yuque.com/antgcode/ry5al9/tux16ez7ctmiknxz))
+ascii : 获取字符串首个字符ascii码([ascii码表](https://antgeekmusk.github.io/blog/20250606/6))
 
 ```sql
 用法 : ascii(str)

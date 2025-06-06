@@ -122,5 +122,5 @@ def run(file_path):
 
 if __name__ == '__main__':
     pass
-    file_path = '/Users/fujunhua/IdeaProjects/antgeekmusk.github.io/public/data/blog/content/20250605/5/Hive 函数大全.md'
+    file_path = ''
     run(file_path)

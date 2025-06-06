@@ -12,9 +12,7 @@ interface MarkdownRenderProps {
 const MarkdownRender : React.FC<MarkdownRenderProps> = ({ markdown }) => {
     const getImgSrc = (src?: string) => {
         // 获取当前页面的path
-        console.log(window.location.pathname)
         const path = window.location.pathname.split('/').slice(2).join('/');
-        console.log(path)
         const bath = '/data/blog/content/'
         return bath+path+'/'+src
     }
