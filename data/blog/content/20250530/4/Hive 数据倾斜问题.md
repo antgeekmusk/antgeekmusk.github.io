@@ -41,7 +41,7 @@ set mapred.min.split.size.per.rack=100000000; -- 100M
 -- 即单个节点上会向着100M这个大小合并,如果不到就暂存起来,不同机架和节点用这些暂存的碎片朝着目标合并,向100M靠近
 ```
 
-可以看作者的另外一篇文章 :[ Hive 小文件问题](https://antgeekmusk.github.io/blog/20250521/1/Hive%20%E5%B0%8F%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98)
+可以看作者的另外一篇文章 :[ Hive 小文件问题](https://antgeekmusk.github.io/blog/20250521/1)
 
 
 

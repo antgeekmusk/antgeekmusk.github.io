@@ -1,5 +1,15 @@
 [
   {
+    "id": 6,
+    "path": "/20250606/6/ASCII码表.md",
+    "title": "ASCII码表",
+    "description": "ASCII码表",
+    "date": "2025-06-06",
+    "columns": ["基础"],
+    "tags": ["基础"],
+    "image_text" : "ASCII码表"
+  },
+  {
     "id": 5,
     "path": "/20250605/5/Hive 函数大全.md",
     "title": "Hive 函数大全",
