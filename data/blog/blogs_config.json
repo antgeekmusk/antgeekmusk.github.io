@@ -1,5 +1,15 @@
 [
   {
+    "id": 7,
+    "path": "/20250608/7/flinkcdc 3.0 尝鲜.md",
+    "title": "flinkcdc 3.0 尝鲜",
+    "description": "flinkcdc 3.0 尝鲜",
+    "date": "2025-06-08",
+    "columns": ["Flink","大数据"],
+    "tags": ["Flink","大数据"],
+    "image_text" : "flinkcdc 3.0 尝鲜"
+  },
+  {
     "id": 6,
     "path": "/20250606/6/ASCII码表.md",
     "title": "ASCII码表",
@@ -15,7 +25,7 @@
     "title": "Hive 函数大全",
     "description": "Hive 函数大全",
     "date": "2025-06-05",
-    "columns": ["Hive"],
+    "columns": ["Hive","大数据"],
     "tags": ["Hive"],
     "image_text" : "Hive 函数大全"
   },
@@ -25,7 +35,7 @@
     "title": "Hive 数据倾斜问题",
     "description": "Hive 数据倾斜问题",
     "date": "2025-05-30",
-    "columns": ["Hive"],
+    "columns": ["Hive","大数据"],
     "tags": ["Hive"],
     "image_text" : "Hive 数据倾斜问题"
   },
@@ -35,7 +45,7 @@
     "title": "Hive 文件存储格式和压缩格式",
     "description": "Hive 文件存储格式和压缩格式",
     "date": "2025-05-28",
-    "columns": ["Hive"],
+    "columns": ["Hive","大数据"],
     "tags": ["Hive"],
     "image_text" : "Hive 文件存储格式和压缩格式"
   },
@@ -45,7 +55,7 @@
     "title": "Hive map和reduce的任务数量如何控制",
     "description": "Hive map和reduce的任务数量如何控制",
     "date": "2025-05-26",
-    "columns": ["大数据"],
+    "columns": ["Hive","大数据"],
     "tags": ["Hive"],
     "image_text" : "Hive map和reduce的任务数量如何控制"
   },
@@ -55,7 +65,7 @@
     "title": "超详细Hive小文件问题介绍及解决方案",
     "description": "Hive小文件问题介绍及解决方案",
     "date": "2025-05-21",
-    "columns": ["Hive"],
+    "columns": ["Hive","大数据"],
     "tags": ["Hive","小文件问题"],
     "image_text" : "超详细Hive小文件问题介绍及解决方案"
   }
