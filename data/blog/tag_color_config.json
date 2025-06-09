@@ -1,0 +1,24 @@
+{
+  "React": "cyan",
+  "JavaScript": "gold",
+  "CSS": "blue",
+  "HTML": "volcano",
+  "Antd": "geekblue",
+  "TypeScript": "purple",
+  "Node": "green",
+  "Hive": "orange",
+  "大数据": "green",
+  "小文件问题": "red",
+  "基础": "purple",
+  "Flink": "volcano",
+
+  "旅行": "blue",
+  "技能解锁": "orange",
+  "与圆圆": "magenta",
+  "骑行":"gold",
+  "代码": "cyan",
+  "重要的日子": "purple",
+  "动漫":"green",
+  "电视剧": "volcano"
+
+}
