@@ -72,6 +72,10 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
         navigate('/AboutMe');
     };
 
+    const handleEnglishLearningClick = () => {
+        navigate('/EnglishLearning');
+    };
+
     return (
         <Header style={headerStyle}>
             <Content className={"header-content"}>
@@ -95,6 +99,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
                 <Content className={"h-middle"}>
                     <ul>
                         <li style={navFontStyle} onClick={handleLogoClick}>博客</li>
+                        <li style={navFontStyle} onClick={handleEnglishLearningClick}>英语学习</li>
                         <li style={navFontStyle} onClick={handleAboutMeClick}>关于我</li>
                     </ul>
                 </Content>

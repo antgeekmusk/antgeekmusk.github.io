@@ -1,14 +1,14 @@
 import React,{ useEffect, useState } from 'react';
 import { Flex, Layout } from 'antd';
-import BlogHeader from "../components/BlogHeader";
-import BlogFooter from "../components/BlogFooter";
-import '../styles/HomePage.css'
-import BlogList from "../components/BlogList";
-import Sidebar from "../components/Sidebar/Sidebar";
-import FloatButtonTools from '../components/FloatButtonTools';
-import Announcement from "../components/Sidebar/item/Announcement";
-import MyGithubCalendar from "../components/GithubCalendar/MyGithubCalendar";
-import SidebarColumn from "../components/Sidebar/item/SidebarColumn";
+import BlogHeader from "../../components/BlogHeader";
+import BlogFooter from "../../components/BlogFooter";
+import '../../styles/HomePage.css'
+import BlogList from "../../components/BlogList";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import FloatButtonTools from '../../components/FloatButtonTools';
+import Announcement from "../../components/Sidebar/item/Announcement";
+import MyGithubCalendar from "../../components/GithubCalendar/MyGithubCalendar";
+import SidebarColumn from "../../components/Sidebar/item/SidebarColumn";
 import {useParams} from "react-router-dom";
 
 const { Content } = Layout;

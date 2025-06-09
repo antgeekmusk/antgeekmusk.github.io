@@ -2,11 +2,11 @@ import React, { useEffect,useState } from 'react';
 import { Timeline, Card, Row, Col, Layout, Tag, Select } from 'antd';
 import { CalendarOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
-import BlogHeader from '../components/BlogHeader';
-import '../styles/AboutMe.css';
-import FloatButtonTools from "../components/FloatButtonTools";
-import BlogFooter from "../components/BlogFooter";
-import {getTagColor} from "../utils/common";
+import BlogHeader from '../../components/BlogHeader';
+import '../../styles/AboutMe.css';
+import FloatButtonTools from "../../components/FloatButtonTools";
+import BlogFooter from "../../components/BlogFooter";
+import {getTagColor} from "../../utils/common";
 const { Content } = Layout;
 const { Option } = Select;
 type AchievementItem = {

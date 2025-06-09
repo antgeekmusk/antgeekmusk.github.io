@@ -1,4 +1,4 @@
-import tagColors from '../config/tag_color_config.json';
+import tagColors from '../../public/data/blog/tag_color_config.json';
 
 type TagColors = {
     [key: string]: string;

@@ -1,10 +1,12 @@
 // AppRouter.jsx
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import AboutMe from "./pages/AboutMe";
+import HomePage from './pages/HomePage/HomePage';
+import AboutMe from "./pages/AboutMe/AboutMe";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import BlogDetail from './pages/BlogDetail';
+import BlogDetail from './pages/BlogDetail/BlogDetail';
 import { blogLoader } from './loaders/BlogLoader';
+import EnglishLearning from "./pages/EnglishLearning/EnglishLearing";
+import {ColumnLoader} from "./loaders/ColumnLoader";
 
 
 // 1. 使用createBrowserRouter替代Routes
@@ -15,6 +17,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/column/:columnName",
+        loader: ColumnLoader, // 拦截非法访问
         element: <HomePage />, // 查看某些专栏的数据
     },
     {
@@ -25,6 +28,10 @@ const router = createBrowserRouter([
     {
         path: "/AboutMe",
         element: <AboutMe />, // 关于我页面
+    },
+    {
+        path: "/EnglishLearning",
+        element: <EnglishLearning />, // 英语学习页面
     },
     {
         path: "/404",
