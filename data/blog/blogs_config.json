@@ -1,5 +1,15 @@
 [
   {
+    "id": 8,
+    "path": "/20250617/8/flinkcdc 3.0 架构设计学习.md",
+    "title": "flinkcdc 3.0 架构设计学习",
+    "description": "flinkcdc 3.0 架构设计学习",
+    "date": "2025-06-17",
+    "columns": ["Flink","大数据"],
+    "tags": ["Flink","大数据"],
+    "image_text" : "flinkcdc 3.0 架构设计学习"
+  },
+  {
     "id": 7,
     "path": "/20250608/7/flinkcdc 3.0 尝鲜.md",
     "title": "flinkcdc 3.0 尝鲜",
