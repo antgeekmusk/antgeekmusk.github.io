@@ -122,5 +122,5 @@ def run(file_path):
 
 if __name__ == '__main__':
     pass
-    file_path = '/Users/fujunhua/IdeaProjects/antgeekmusk.github.io/public/data/blog/content/20250608/7/flinkcdc 3.0 尝鲜.md'
+    file_path = '/public/data/blog/content/20250617/8/flinkcdc 3.0 架构设计学习.md'
     run(file_path)
