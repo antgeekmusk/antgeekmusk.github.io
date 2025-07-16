@@ -68,7 +68,7 @@ const AboutMe: React.FC = () => {
 
     return (
         <Layout>
-            <BlogHeader colorChaneFlag={false}/>
+            <BlogHeader colorChangeFlag={false}/>
             <Content className="about-me">
                 <div className="self-introduction">
                     <h1>我的介绍</h1>

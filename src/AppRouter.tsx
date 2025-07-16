@@ -5,7 +5,6 @@ import AboutMe from "./pages/AboutMe/AboutMe";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import BlogDetail from './pages/BlogDetail/BlogDetail';
 import { blogLoader } from './loaders/BlogLoader';
-import EnglishLearning from "./pages/EnglishLearning/EnglishLearing";
 import {ColumnLoader} from "./loaders/ColumnLoader";
 
 
@@ -28,10 +27,6 @@ const router = createBrowserRouter([
     {
         path: "/AboutMe",
         element: <AboutMe />, // 关于我页面
-    },
-    {
-        path: "/EnglishLearning",
-        element: <EnglishLearning />, // 英语学习页面
     },
     {
         path: "/404",

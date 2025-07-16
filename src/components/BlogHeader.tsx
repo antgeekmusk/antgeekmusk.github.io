@@ -8,10 +8,10 @@ import {URL} from '../common/GlobleConfig'
 const { Header, Content} = Layout;
 
 interface BlogHeaderProps {
-    colorChaneFlag?: boolean; // 是否需要改变颜色 默认为true
+    colorChangeFlag?: boolean; // 是否需要改变颜色 默认为true
 }
 
-const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
+const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [drawerVisible, setDrawerVisible] = useState(false);
     const [language, setLanguage] = useState('en');
@@ -23,17 +23,17 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
             color: '#f000',
             height: 95,
             width: '100vw',
-            backgroundColor: colorChaneFlag ? (scrollPosition>10 ? 'white' : 'transparent') : 'white',
-            boxShadow: colorChaneFlag ? (scrollPosition>10 ? '0 2px 8px rgba(0,0,0,0.06)' : 'none') : '0 2px 8px rgba(0,0,0,0.06)',
+            backgroundColor: colorChangeFlag ? (scrollPosition>10 ? 'white' : 'transparent') : 'white',
+            boxShadow: colorChangeFlag ? (scrollPosition>10 ? '0 2px 8px rgba(0,0,0,0.06)' : 'none') : '0 2px 8px rgba(0,0,0,0.06)',
             transition: 'background-color 0.5s ease, box-shadow 0.5s ease',
             zIndex: 1000,
         };
     // 导航栏字体颜色
     const navFontStyle: React.CSSProperties = {
-        color: colorChaneFlag ? (scrollPosition>0? 'black' : 'white') : "black",
+        color: colorChangeFlag ? (scrollPosition>0? 'black' : 'white') : "black",
     }
     // logo图片
-    const logoImage = colorChaneFlag ? (scrollPosition > 0 ? 'logo.png' : 'logo-white.png') : 'logo.png';
+    const logoImage = colorChangeFlag ? (scrollPosition > 0 ? 'logo.png' : 'logo-white.png') : 'logo.png';
     // 监听滚动事件
     useEffect(() => {
         const handleScroll = () => {
@@ -76,6 +76,10 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
         navigate('/EnglishLearning');
     };
 
+    const handleWordListClick = () => {
+        navigate('/WordList');
+    };
+
     return (
         <Header style={headerStyle}>
             <Content className={"header-content"}>
@@ -91,7 +95,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
                     </div>
                     <div
                         className={"h-left-text"}
-                        style={{ marginLeft: '10px', fontSize: '24px', color: colorChaneFlag ? (scrollPosition > 0 ? 'black' : 'white') : 'black' }}>
+                        style={{ marginLeft: '10px', fontSize: '24px', color: colorChangeFlag ? (scrollPosition > 0 ? 'black' : 'white') : 'black' }}>
                         Antgeek
                     </div>
                 </Content>
@@ -99,13 +103,12 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChaneFlag = true}) => {
                 <Content className={"h-middle"}>
                     <ul>
                         <li style={navFontStyle} onClick={handleLogoClick}>博客</li>
-                        <li style={navFontStyle} onClick={handleEnglishLearningClick}>英语学习</li>
                         <li style={navFontStyle} onClick={handleAboutMeClick}>关于我</li>
                     </ul>
                 </Content>
                 {/*移动端导航栏*/}
                 <Content className={"h-mobile-menu"}>
-                    <Button size={"large"} className={"mobile-menu-button"} style={{color: `${colorChaneFlag ? (scrollPosition > 0 ? 'black' : 'white') : 'black'}`}} type="primary" icon={<MenuOutlined />} onClick={showDrawer} />
+                    <Button size={"large"} className={"mobile-menu-button"} style={{color: `${colorChangeFlag ? (scrollPosition > 0 ? 'black' : 'white') : 'black'}`}} type="primary" icon={<MenuOutlined />} onClick={showDrawer} />
                     <Drawer
                         title="导航"
                         placement="right"
