@@ -563,7 +563,7 @@ abc
 
 
 ## 获取字符ASCII码
-ascii : 获取字符串首个字符ascii码([ascii码表](https://antgeekmusk.github.io/blog/20250606/6))
+ascii : 获取字符串首个字符ascii码([ascii码表](https://www.yuque.com/antgcode/ry5al9/tux16ez7ctmiknxz))
 
 ```sql
 用法 : ascii(str)
@@ -1834,9 +1834,135 @@ Error: java.io.IOException: org.apache.hadoop.hive.ql.metadata.HiveException: Er
 
 
 # 九.开窗函数
-cume_dist (待处理)
+在 Hive 中，开窗函数（Window Functions）用于在一个查询结果集中的行集上执行计算，而不需要使用`GROUP BY` 子句对数据进行分组聚合，从而保留原表的行记录数。常见的开窗函数可以分为以下几类：
 
-dense_rank
+## 1. 聚合开窗函数
+这类函数对窗口内的数据进行聚合计算，常见的有：
+
++ `SUM()`：计算窗口内指定列的总和。  
+例如，统计每个部门员工的工资总和（窗口为每个部门内）：
+
+```sql
+SELECT department, employee_name, salary,
+       SUM(salary) OVER (PARTITION BY department) AS dept_total_salary
+FROM employees;
+```
+
+这里`PARTITION BY department`定义了窗口的划分，即按照部门进行分区，在每个分区内计算工资总和。
+
++ `AVG()`：计算窗口内指定列的平均值。  
+比如，计算每个部门员工的平均工资：
+
+```sql
+SELECT department, employee_name, salary,
+       AVG(salary) OVER (PARTITION BY department) AS dept_avg_salary
+FROM employees;
+```
+
++ `COUNT()`：统计窗口内的行数。  
+例如，统计每个部门的员工数量：
+
+```sql
+SELECT department, employee_name,
+       COUNT(*) OVER (PARTITION BY department) AS dept_employee_count
+FROM employees;
+```
+
++ `MAX()`：返回窗口内指定列的最大值。  
+比如，找出每个部门员工的最高工资：
+
+```sql
+SELECT department, employee_name, salary,
+       MAX(salary) OVER (PARTITION BY department) AS dept_max_salary
+FROM employees;
+```
+
++ `MIN()`：返回窗口内指定列的最小值。  
+示例：获取每个部门员工的最低工资：
+
+```sql
+SELECT department, employee_name, salary,
+       MIN(salary) OVER (PARTITION BY department) AS dept_min_salary
+FROM employees;
+```
+
+## 2. 排序开窗函数
+用于对窗口内的数据进行排序，并返回相关的排名信息，常见的有：
+
++ `ROW_NUMBER()`：为窗口内的每一行分配一个唯一的连续排名，按照指定的排序规则进行排序。  
+例如，按照员工工资从高到低，给每个部门的员工进行排名：
+
+```sql
+SELECT department, employee_name, salary,
+       ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS rank_in_dept
+FROM employees;
+```
+
++ `RANK()`：为窗口内的每一行分配一个排名，相同的值会有相同的排名，排名之间会有间隔（例如有两个第一名，下一个就是第三名）。  
+比如，获取每个部门内员工工资的排名（相同工资排名相同）：
+
+```sql
+SELECT department, employee_name, salary,
+       RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rank_in_dept
+FROM employees;
+```
+
++ `DENSE_RANK()`：为窗口内的每一行分配一个排名，相同的值会有相同的排名，排名之间是连续的（例如有两个第一名，下一个就是第二名）。  
+示例：按部门内员工工资进行连续排名：
+
+```sql
+SELECT department, employee_name, salary,
+       DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rank_in_dept
+FROM employees;
+```
+
+## 3. 取值开窗函数
++ `FIRST_VALUE()`：返回窗口内按照指定排序规则的第一行的值。  
+例如，获取每个部门最早入职的员工姓名：
+
+```sql
+SELECT department, employee_name, hire_date,
+       FIRST_VALUE(employee_name) OVER (PARTITION BY department ORDER BY hire_date) AS first_hired_employee
+FROM employees;
+```
+
++ `LAST_VALUE()`：返回窗口内按照指定排序规则的最后一行的值。  
+比如，获取每个部门最晚入职的员工姓名：
+
+```sql
+SELECT department, employee_name, hire_date,
+       LAST_VALUE(employee_name) OVER (PARTITION BY department ORDER BY hire_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS last_hired_employee
+FROM employees;
+```
+
+这里需要注意，`LAST_VALUE()`默认窗口是从当前行到窗口结束，所以要获取真正的最后一行，通常需要明确指定窗口范围为`ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING` 。
+
+## 4. 偏移开窗函数
++ `LEAD()`：返回窗口内当前行之后指定偏移量的行的值。  
+例如，查看每个员工的下一个员工的工资：
+
+```sql
+SELECT employee_name, salary,
+       LEAD(salary, 1, -1) OVER (ORDER BY employee_id) AS next_employee_salary
+FROM employees;
+```
+
+这里`LEAD(salary, 1, -1)`表示获取当前行之后偏移 1 行的`salary`值。如果取值超过范围默认值是-1。
+
++ `LAG()`：返回窗口内当前行之前指定偏移量的行的值。  
+示例：获取每个员工上一个员工的工资：
+
+```sql
+SELECT employee_name, salary,
+       LAG(salary, 1, -1) OVER (ORDER BY employee_id) AS previous_employee_salary
+FROM employees;
+```
+
+`LAG(salary, 1, -1)`表示获取当前行之前偏移 1 行的`salary`值。如果取值超过范围默认值是-1。
+
+
+
+开窗函数通过`OVER`子句来定义窗口的范围和排序规则，`PARTITION BY`用于指定分区，`ORDER BY`用于指定排序，还可以通过`ROWS BETWEEN` 子句来进一步细化窗口的范围。
 
 # 十.其他
 ## 断言函数
