@@ -18,5 +18,9 @@
   {
     "name": "编程技巧",
     "order": 1
+  },
+  {
+    "name": "Hadoop",
+    "order": 1
   }
 ]
