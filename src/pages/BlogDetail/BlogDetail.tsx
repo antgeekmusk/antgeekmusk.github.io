@@ -178,7 +178,7 @@ const BlogDetail: React.FC = () => {
     return (
         <Layout className={"blog-detail"}>
             {/*博客头部*/}
-            <BlogHeader colorChaneFlag={false}/>
+            <BlogHeader colorChangeFlag={false}/>
             {/*博客内容*/}
             <Content className="blog-detail-container">
                 {blog ? (

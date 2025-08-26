@@ -1,5 +1,15 @@
 [
   {
+    "id": 11,
+    "path": "/20250826/11/Hadoop常用命令.md",
+    "title": "Hadoop常用命令",
+    "description": "Hadoop常用命令",
+    "date": "2025-08-26",
+    "columns": ["大数据","Hadoop"],
+    "tags": ["大数据","Hadoop"],
+    "image_text" : "Hadoop常用命令"
+  },
+  {
     "id": 10,
     "path": "/20250703/10/Hive 学习路线及方法.md",
     "title": "Hive 学习路线及方法",
