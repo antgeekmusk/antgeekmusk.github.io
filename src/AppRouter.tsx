@@ -6,6 +6,8 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import BlogDetail from './pages/BlogDetail/BlogDetail';
 import { blogLoader } from './loaders/BlogLoader';
 import {ColumnLoader} from "./loaders/ColumnLoader";
+import Portfolio from "./pages/Portfolio/Protfolio";
+import TicTacToe from "./pages/Portfolio/practice/tic-tac-toe/TicTacToe";
 
 
 // 1. 使用createBrowserRouter替代Routes
@@ -28,6 +30,16 @@ const router = createBrowserRouter([
         path: "/AboutMe",
         element: <AboutMe />, // 关于我页面
     },
+    {
+        path: "/Portfolio",
+        element: <Portfolio />, // 作品集页面
+    },
+
+    {
+        path: "/Portfolio/practice/tic-tac-toe",
+        element: <TicTacToe />, // 作品集页面-练习-react井字游戏
+    },
+
     {
         path: "/404",
         element: <PageNotFound />, // 404页面

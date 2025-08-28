@@ -72,12 +72,8 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
         navigate('/AboutMe');
     };
 
-    const handleEnglishLearningClick = () => {
-        navigate('/EnglishLearning');
-    };
-
-    const handleWordListClick = () => {
-        navigate('/WordList');
+    const handlePortfolioClick = () => {
+        navigate('/Portfolio');
     };
 
     return (
@@ -104,6 +100,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
                     <ul>
                         <li style={navFontStyle} onClick={handleLogoClick}>博客</li>
                         <li style={navFontStyle} onClick={handleAboutMeClick}>关于我</li>
+                        <li style={navFontStyle} onClick={handlePortfolioClick}>作品集</li>
                     </ul>
                 </Content>
                 {/*移动端导航栏*/}
@@ -118,6 +115,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
                         <div className={"h-mobile-menu-nav"}>
                             <p onClick={handleLogoClick}>博客</p>
                             <p onClick={handleAboutMeClick}>关于我</p>
+                            <p onClick={handlePortfolioClick}>作品集</p>
                         </div>
                         <br/><br/><br/><br/>
                         <Button

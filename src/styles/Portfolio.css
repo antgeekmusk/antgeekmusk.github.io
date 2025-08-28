@@ -1,0 +1,45 @@
+.portfolio {
+    padding-top: 120px;
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: white;
+}
+
+.self-introduction {
+    margin-bottom: 40px;
+}
+
+.portfolio-wall {
+    margin-top: 40px;
+}
+
+.portfolio-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.portfolio-images img {
+    width: 100%;
+    height: auto;
+    max-width: 100px;
+    border-radius: 5px;
+}
+
+.portfolio-card .ant-card-head-title {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .ant-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .portfolio {
+        padding-top: 120px;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
