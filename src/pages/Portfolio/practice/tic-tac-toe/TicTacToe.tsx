@@ -76,6 +76,7 @@ function Board({isNext,squares,onPlay}:BoardProps){
     )
 }
 
+// 主输出
 export default function TicTacToe(){
     const [history,setHistory] = useState<(string | null)[][]>([Array(9).fill(null)]);
     const [currentMove,setCurrentMove] = useState(0);
@@ -87,7 +88,6 @@ export default function TicTacToe(){
         setCurrentMove(netxHistory.length - 1);
     }
     return (
-
         <div className={"container"}>
             <Board isNext={isNext} squares={currentSquares} onPlay={handlePlay}></Board>
         </div>

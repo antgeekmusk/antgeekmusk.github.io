@@ -43,3 +43,7 @@
         padding-right: 5%;
     }
 }
+
+.portfolio-card:hover {
+    cursor: pointer;
+}

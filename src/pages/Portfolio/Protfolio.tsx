@@ -70,7 +70,7 @@ const Portfolio: React.FC = () => {
         : portfolios;
 
     const handleCardClick = (route:string) => {
-        navigate('/Portfolio'+route);
+        window.open('/Portfolio' + route, '_blank');
     }
 
     return (
