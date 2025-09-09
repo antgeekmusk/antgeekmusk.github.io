@@ -20,6 +20,26 @@ function Square({value,onSquareClick}: SquareProps){
     )
 }
 
+const calculateWinner = (squares:(string | null)[]) => {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a];
+        }
+    }
+    return null;
+}
+
 // 游戏面板
 function Board({isNext,squares,onPlay}:BoardProps){
     const handelClick = (i:number) => {
@@ -33,45 +53,19 @@ function Board({isNext,squares,onPlay}:BoardProps){
             nextSquares[i] = 'O';
         }
         onPlay(nextSquares)
-
     }
 
-    const calculateWinner = (squares:(string | null)[]) => {
-        const lines = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6],
-        ];
-        for (let i = 0; i < lines.length; i++) {
-            const [a, b, c] = lines[i];
-            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                return squares[a];
-            }
-        }
-        return null;
-    }
+
     return (
         <div className={"board"}>
-            <div className={"board-row"}>
-                <Square value={squares[0]} onSquareClick={()=>handelClick(0)}></Square>
-                <Square value={squares[1]} onSquareClick={()=>handelClick(1)}></Square>
-                <Square value={squares[2]} onSquareClick={()=>handelClick(2)}></Square>
-            </div>
-            <div className={"board-row"}>
-                <Square value={squares[3]} onSquareClick={()=>handelClick(3)}></Square>
-                <Square value={squares[4]} onSquareClick={()=>handelClick(4)}></Square>
-                <Square value={squares[5]} onSquareClick={()=>handelClick(5)}></Square>
-            </div>
-            <div className={"board-row"}>
-                <Square value={squares[6]} onSquareClick={()=>handelClick(6)}></Square>
-                <Square value={squares[7]} onSquareClick={()=>handelClick(7)}></Square>
-                <Square value={squares[8]} onSquareClick={()=>handelClick(8)}></Square>
-            </div>
+            {[0,1,2].map((row) => (
+                <div className={"board-row"} key={row}>
+                    {[0,1,2].map((col) => {
+                        const index = row * 3 + col;
+                        return <Square key={index} value={squares[index]} onSquareClick={()=>handelClick(index)}></Square>
+                    })}
+                </div>
+            ))}
         </div>
     )
 }
@@ -90,6 +84,31 @@ export default function TicTacToe(){
     return (
         <div className={"container"}>
             <Board isNext={isNext} squares={currentSquares} onPlay={handlePlay}></Board>
+            <div>
+                <h3>历史记录</h3>
+                <ol>
+                    {history.map((squares, move) => {
+                        let description;
+                        if (move > 0) {
+                            description = `Go to move #${move}`;
+                        } else {
+                            description = 'Go to game start';
+                        }
+                        return (
+                            <li key={move}>
+                                <button onClick={() => setCurrentMove(move)}
+                                        disabled={move === currentMove}>{description}</button>
+                            </li>
+                        )
+                    })}
+                </ol>
+                <h3>获胜者 : {calculateWinner(currentSquares) ? calculateWinner(currentSquares) : '还未决出胜负'}</h3>
+                <button onClick={() => {
+                    setHistory([Array(9).fill(null)]);
+                    setCurrentMove(0);
+                }}>重新开始
+                </button>
+            </div>
         </div>
     )
 }
