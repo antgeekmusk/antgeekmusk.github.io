@@ -34,7 +34,7 @@ const BlogList: React.FC<BlogListProps> = ({columnName = ''}) => {
                 setBlogs(data)
 
             })
-    }, []);
+    }, [columnName]);
 
     const handleBlogClick = (blog: any) => {
         const blogPathPrefix = blog.path.split('/').slice(0, 3).join('/');

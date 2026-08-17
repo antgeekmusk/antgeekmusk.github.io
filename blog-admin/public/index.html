@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Admin · 博客后台管理</title>
+    <link rel="stylesheet" href="/admin/css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="side">
+        <div class="brand">
+            <span class="brand-logo">📝</span>
+            <div class="brand-text">
+                <strong>Blog Admin</strong>
+                <small>博客后台管理</small>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="#/articles" data-nav="articles"><span>📄</span> 文章管理</a>
+            <a href="#/achievements" data-nav="achievements"><span>🏆</span> 成就管理</a>
+            <a href="#/columns" data-nav="columns"><span>📚</span> 专栏管理</a>
+            <a href="#/tags" data-nav="tags"><span>🏷️</span> Tag 管理</a>
+            <a href="#/portfolio" data-nav="portfolio"><span>💼</span> 作品集管理</a>
+            <a href="#/settings" data-nav="settings"><span>⚙️</span> 站点设置</a>
+        </nav>
+        <div class="side-footer">
+            <a href="https://antgeekmusk.github.io" target="_blank" rel="noopener">查看线上站点 ↗</a>
+            <div class="side-info" id="side-info"></div>
+        </div>
+    </aside>
+    <main class="main">
+        <header class="topbar">
+            <h1 id="page-title">文章管理</h1>
+            <div class="topbar-actions" id="topbar-actions"></div>
+        </header>
+        <section class="content" id="content"></section>
+    </main>
+</div>
+
+<div class="modal-mask" id="modal-mask">
+    <div class="modal" id="modal-box" role="dialog" aria-modal="true"></div>
+</div>
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="/admin/js/api.js"></script>
+<script src="/admin/js/ui.js"></script>
+<script src="/admin/js/app.js"></script>
+<script src="/admin/js/articles.js"></script>
+<script src="/admin/js/achievements.js"></script>
+<script src="/admin/js/columns.js"></script>
+<script src="/admin/js/tags.js"></script>
+<script src="/admin/js/portfolio.js"></script>
+<script src="/admin/js/settings.js"></script>
+</body>
+</html>

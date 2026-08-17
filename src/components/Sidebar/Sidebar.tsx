@@ -3,7 +3,6 @@ import '../../styles/Sidebar.css';
 import Announcement from './item/Announcement';
 import LatestArticles from './item/LatestArticles';
 import Categories from './item/Categories';
-import Tags from './item/Tags';
 import Archives from './item/Archives';
 import SiteInfo from './item/SiteInfo';
 import StickyWrapper from "./item/StickyWrapper";

@@ -165,7 +165,7 @@ const BlogDetail: React.FC = () => {
     const getWordCountAndReadTime = (text: string) => {
         // 只统计中文和英文的字数
         const wordCount = (text.match(/[\u4e00-\u9fa5a-zA-Z]/g) || []).length;
-        const readTime = Math.ceil(wordCount / 300); // Assuming an average reading speed of 200 words per minute
+        const readTime = Math.ceil(wordCount / 300); // Assuming an average reading speed of 300 words per minute
         return { wordCount, readTime };
     };
 

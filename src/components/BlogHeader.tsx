@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout, Drawer, Button } from 'antd';
 import { MenuOutlined,GithubOutlined,GlobalOutlined } from '@ant-design/icons';
 import '../styles/BlogHeader.css'
-import {URL} from '../common/GlobleConfig'
+import {URL} from '../common/GlobalConfig'
 
 const { Header, Content} = Layout;
 

@@ -7,7 +7,7 @@
     "date": "2025-08-27",
     "columns": ["大数据","Hadoop"],
     "tags": ["大数据","Hadoop"],
-    "image_text" : "HDFS 块大小设置及其原则"
+    "image_text": "HDFS 块大小设置及其原则"
   },
   {
     "id": 11,
@@ -17,7 +17,7 @@
     "date": "2025-08-26",
     "columns": ["大数据","Hadoop"],
     "tags": ["大数据","Hadoop"],
-    "image_text" : "Hadoop常用命令"
+    "image_text": "Hadoop常用命令"
   },
   {
     "id": 10,
@@ -27,7 +27,7 @@
     "date": "2025-07-03",
     "columns": ["编程技巧","Hive","大数据"],
     "tags": ["编程技巧","Hive","大数据"],
-    "image_text" : "Hive 学习路线及方法"
+    "image_text": "Hive 学习路线及方法"
   },
   {
     "id": 9,
@@ -37,7 +37,7 @@
     "date": "2025-06-18",
     "columns": ["编程技巧"],
     "tags": ["编程技巧"],
-    "image_text" : "一个修改源码的一个小技巧"
+    "image_text": "一个修改源码的一个小技巧"
   },
   {
     "id": 8,
@@ -47,7 +47,7 @@
     "date": "2025-06-17",
     "columns": ["Flink","大数据"],
     "tags": ["Flink","大数据"],
-    "image_text" : "flinkcdc 3.0 架构设计学习"
+    "image_text": "flinkcdc 3.0 架构设计学习"
   },
   {
     "id": 7,
@@ -57,7 +57,7 @@
     "date": "2025-06-08",
     "columns": ["Flink","大数据"],
     "tags": ["Flink","大数据"],
-    "image_text" : "flinkcdc 3.0 尝鲜"
+    "image_text": "flinkcdc 3.0 尝鲜"
   },
   {
     "id": 6,
@@ -67,7 +67,7 @@
     "date": "2025-06-06",
     "columns": ["基础"],
     "tags": ["基础"],
-    "image_text" : "ASCII码表"
+    "image_text": "ASCII码表"
   },
   {
     "id": 5,
@@ -77,7 +77,7 @@
     "date": "2025-06-05",
     "columns": ["Hive","大数据"],
     "tags": ["Hive"],
-    "image_text" : "Hive 函数大全"
+    "image_text": "Hive 函数大全"
   },
   {
     "id": 4,
@@ -87,7 +87,7 @@
     "date": "2025-05-30",
     "columns": ["Hive","大数据"],
     "tags": ["Hive"],
-    "image_text" : "Hive 数据倾斜问题"
+    "image_text": "Hive 数据倾斜问题"
   },
   {
     "id": 3,
@@ -97,7 +97,7 @@
     "date": "2025-05-28",
     "columns": ["Hive","大数据"],
     "tags": ["Hive"],
-    "image_text" : "Hive 文件存储格式和压缩格式"
+    "image_text": "Hive 文件存储格式和压缩格式"
   },
   {
     "id": 2,
@@ -107,7 +107,7 @@
     "date": "2025-05-26",
     "columns": ["Hive","大数据"],
     "tags": ["Hive"],
-    "image_text" : "Hive map和reduce的任务数量如何控制"
+    "image_text": "Hive map和reduce的任务数量如何控制"
   },
   {
     "id": 1,
@@ -117,6 +117,6 @@
     "date": "2025-05-21",
     "columns": ["Hive","大数据"],
     "tags": ["Hive","小文件问题"],
-    "image_text" : "超详细Hive小文件问题介绍及解决方案"
+    "image_text": "超详细Hive小文件问题介绍及解决方案"
   }
 ]

@@ -1,0 +1,18 @@
+{
+  "name": "blog-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "博客后台管理系统：通过网页管理文章、成就、专栏、Tag、作品集等数据",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.2"
+  }
+}

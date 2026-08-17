@@ -36,6 +36,7 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "admin": "npm --prefix blog-admin start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b main -d build"
   },

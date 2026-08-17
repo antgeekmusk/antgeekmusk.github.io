@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import {URL} from "../common/GlobleConfig"
+import {URL} from "../common/GlobalConfig"
 import {rgba} from "framer-motion";
 const { Footer: Footer} = Layout;
 const footerStyle: React.CSSProperties = {
