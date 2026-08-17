@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
-import { Timeline, Card, Row, Col, Layout, Tag, Select } from 'antd';
-import { CalendarOutlined } from '@ant-design/icons';
+import { Timeline, Card, Row, Col, Layout, Tag, Select, Modal } from 'antd';
+import { CalendarOutlined, PlusOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import BlogHeader from '../../components/BlogHeader';
 import '../../styles/AboutMe.css';
@@ -15,7 +15,7 @@ type AchievementItem = {
     date: string;
     images?: string[];
     tags?: string[];
-    emoji?: string; // Add emoji field
+    emoji?: string;
 };
 
 type Achievement = {
@@ -23,6 +23,9 @@ type Achievement = {
     items: AchievementItem[];
 };
 
+/** 截断长文本：保留前 maxLen 个字符，超出加 … */
+const truncate = (text: string, maxLen: number): string =>
+    text.length > maxLen ? text.substring(0, maxLen) + '…' : text;
 
 const addBaseTag = () => {
     const base = document.createElement('base');
@@ -34,6 +37,10 @@ const AboutMe: React.FC = () => {
     const [myInfo, setMyInfo] = useState<string>('');
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
     const [allTags, setAllTags] = useState<string[]>([]);
+    // 详情弹窗状态
+    const [detailItem, setDetailItem] = useState<AchievementItem | null>(null);
+    const [detailVisible, setDetailVisible] = useState(false);
+
     useEffect(() => {
         addBaseTag();
         // 获取achievement数据
@@ -57,6 +64,11 @@ const AboutMe: React.FC = () => {
 
     const handleTagChange = (value: string) => {
         setSelectedTag(value);
+    };
+
+    const openDetail = (item: AchievementItem) => {
+        setDetailItem(item);
+        setDetailVisible(true);
     };
 
     const filteredAchievements = selectedTag
@@ -100,7 +112,10 @@ const AboutMe: React.FC = () => {
                                 <Row gutter={[16, 16]}>
                                     {achievement.items.map((item, index) => (
                                         <Col key={index} span={8}>
-                                            <Card className="achievement-card" title={
+                                            <Card className="achievement-card"
+                                                  hoverable
+                                                  onClick={() => openDetail(item)}
+                                                  title={
                                                 <span>{item.emoji} {item.title}</span>} bordered={false}>
                                                 <div>
                                                     {item.tags && item.tags.map((tag, idx) => (
@@ -111,17 +126,20 @@ const AboutMe: React.FC = () => {
                                                 <p>
                                                     <CalendarOutlined/> {item.date}
                                                 </p>
-                                                <ReactMarkdown>{item.description}</ReactMarkdown>
+                                                <ReactMarkdown>{truncate(item.description, 80)}</ReactMarkdown>
                                                 {item.images && item.images.length > 0 && (
                                                     <div className="achievement-images">
-                                                        {item.images.map((image, idx) => (
-                                                            <img key={idx} src={image}
-                                                                 alt={`Achievement ${index + 1} Image ${idx + 1}`}/>
-                                                        ))}
+                                                        <div className="achievement-image-wrapper">
+                                                            <img src={item.images[0]}
+                                                                 alt={`${item.title} 图片`}/>
+                                                            {item.images.length > 1 && (
+                                                                <div className="image-overlay">
+                                                                    <PlusOutlined/> {item.images.length - 1}
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 )}
-
-
                                             </Card>
                                         </Col>
                                     ))}
@@ -130,6 +148,37 @@ const AboutMe: React.FC = () => {
                         ))}
                     </Timeline>
                 </div>
+
+                {/* 详情弹窗 */}
+                <Modal
+                    title={detailItem ? `${detailItem.emoji} ${detailItem.title}` : ''}
+                    open={detailVisible}
+                    onCancel={() => setDetailVisible(false)}
+                    footer={null}
+                    width={720}
+                    centered
+                >
+                    {detailItem && (
+                        <div className="detail-modal-body">
+                            <div className="detail-meta">
+                                {detailItem.tags && detailItem.tags.map((tag, idx) => (
+                                    <Tag key={idx} color={getTagColor(tag)} bordered={false}>{tag}</Tag>
+                                ))}
+                                <span className="detail-date"><CalendarOutlined/> {detailItem.date}</span>
+                            </div>
+                            <div className="detail-description">
+                                <ReactMarkdown>{detailItem.description}</ReactMarkdown>
+                            </div>
+                            {detailItem.images && detailItem.images.length > 0 && (
+                                <div className="detail-images">
+                                    {detailItem.images.map((img, idx) => (
+                                        <img key={idx} src={img} alt={`${detailItem.title} 图片 ${idx + 1}`}/>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </Modal>
             </Content>
             <FloatButtonTools/>
             <BlogFooter/>
