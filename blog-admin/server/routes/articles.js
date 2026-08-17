@@ -7,7 +7,7 @@ const fs = require('fs');
 const multer = require('multer');
 const { DATA_PATHS, ensureDir } = require('../config');
 const {
-    readJson, writeJson, readText, writeText, removeDir, sanitizeFileName,
+    readJson, writeJson, readText, writeText, removeDir, sanitizeFileName, decodeUploadName,
     nextId, sortBlogs, parseBlogPath, error, wrap,
 } = require('../utils');
 
@@ -151,7 +151,7 @@ router.post('/:id/images', upload.array('files'), wrap((req, res) => {
 
     const saved = [];
     for (const file of req.files || []) {
-        let name = sanitizeFileName(file.originalname, `image-${Date.now()}`);
+        let name = sanitizeFileName(decodeUploadName(file.originalname), `image-${Date.now()}`);
         let target = path.join(folder, name);
         if (fs.existsSync(target)) {
             name = `${Date.now()}-${name}`;

@@ -114,6 +114,20 @@ function sanitizeFileName(name, fallback = 'untitled') {
     return cleaned || fallback;
 }
 
+/**
+ * 还原 multer/busboy 导致的 multipart 文件名中文乱码。
+ * busboy 默认按 latin1 解析 Content-Disposition 中的 filename，
+ * 浏览器上传的 UTF-8 中文文件名会被解成 æç 之类的乱码，这里转回 UTF-8。
+ */
+function decodeUploadName(name) {
+    if (typeof name !== 'string' || !name) return name;
+    // 纯 ASCII 名字无需处理
+    if (!/[^\x00-\x7F]/.test(name)) return name;
+    const recovered = Buffer.from(name, 'latin1').toString('utf8');
+    // 若还原结果含替换符 U+FFFD，说明原名本身就是合法 UTF-8，保持原名
+    return recovered.includes('\uFFFD') ? name : recovered;
+}
+
 /** 生成下一个自增 id */
 function nextId(list) {
     const max = list.reduce((m, item) => Math.max(m, Number(item.id) || 0), 0);
@@ -170,6 +184,7 @@ module.exports = {
     writeText,
     removeDir,
     sanitizeFileName,
+    decodeUploadName,
     nextId,
     sortBlogs,
     parseBlogPath,

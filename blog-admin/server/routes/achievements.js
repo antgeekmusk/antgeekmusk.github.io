@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const { DATA_PATHS, ensureDir } = require('../config');
-const { readJson, writeJson, readText, writeText, sanitizeFileName, error, wrap } = require('../utils');
+const { readJson, writeJson, readText, writeText, sanitizeFileName, decodeUploadName, error, wrap } = require('../utils');
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
@@ -92,7 +92,7 @@ router.post('/images', upload.array('files'), wrap((req, res) => {
     ensureDir(DATA_PATHS.achievementImages);
     const saved = [];
     for (const file of req.files || []) {
-        let name = sanitizeFileName(file.originalname, `image-${Date.now()}`);
+        let name = sanitizeFileName(decodeUploadName(file.originalname), `image-${Date.now()}`);
         let target = path.join(DATA_PATHS.achievementImages, name);
         if (fs.existsSync(target)) {
             name = `${Date.now()}-${name}`;
