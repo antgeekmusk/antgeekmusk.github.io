@@ -16,14 +16,12 @@
   "练习": "green",
   "作品": "gold",
   "实验": "geekblue",
-
   "旅行": "blue",
   "技能解锁": "orange",
   "与圆圆": "magenta",
-  "骑行":"gold",
+  "骑行": "gold",
   "代码": "cyan",
   "重要的日子": "purple",
-  "动漫":"green",
+  "动漫": "green",
   "电视剧": "volcano"
-
 }
