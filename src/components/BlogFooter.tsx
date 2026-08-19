@@ -1,18 +1,33 @@
 import React from 'react';
 import { Layout } from 'antd';
-import {URL} from "../common/GlobalConfig"
-import {rgba} from "framer-motion";
-const { Footer: Footer} = Layout;
-const footerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: 'black',
-    backgroundColor: 'rgb(242,242,242)',
+import { GithubOutlined, HeartFilled } from '@ant-design/icons';
+import { URL } from "../common/GlobalConfig";
+import '../styles/BlogFooter.css';
 
-};
+const { Footer } = Layout;
+
 const BlogFooter: React.FC = () => {
     return (
-        <Footer style={footerStyle}>
-            Copyright by <a href={URL.github} target="_blank">Antgeek</a>
+        <Footer className="site-footer">
+            <div className="footer-inner">
+                <div className="footer-section footer-brand">
+                    <span className="footer-logo">🐜 Antgeek</span>
+                    <p className="footer-tagline">记录成长，分享足迹</p>
+                </div>
+                <div className="footer-section footer-links">
+                    <a href="/" className="footer-link">博客</a>
+                    <a href="/AboutMe" className="footer-link">关于我</a>
+                    <a href="/Portfolio" className="footer-link">作品集</a>
+                </div>
+                <div className="footer-section footer-social">
+                    <a href={URL.github} target="_blank" rel="noopener" className="footer-icon-link" title="GitHub">
+                        <GithubOutlined />
+                    </a>
+                </div>
+            </div>
+            <div className="footer-bottom">
+                <span>© {new Date().getFullYear()} Antgeek — Built with <HeartFilled className="heart-icon" /> & React</span>
+            </div>
         </Footer>
     );
 };

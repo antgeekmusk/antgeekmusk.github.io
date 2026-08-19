@@ -1,7 +1,7 @@
-/* ============ 成就管理 ============ */
+/* ============ 足迹管理 ============ */
 
 registerRoute('achievements', {
-    title: '成就管理',
+    title: '足迹管理',
     renderActions(el) {
         const btn = document.createElement('button');
         btn.className = 'btn btn-primary';
@@ -12,7 +12,7 @@ registerRoute('achievements', {
             try {
                 await api('/achievements', {
                     method: 'POST',
-                    body: { year, title: '占位成就，请编辑', date: `${year}-01-01`, description: '', emoji: '⭐', tags: [] },
+                    body: { year, title: '占位足迹，请编辑', date: `${year}-01-01`, description: '', emoji: '⭐', tags: [] },
                 });
                 toast('年份已创建');
                 location.reload();
@@ -31,7 +31,7 @@ registerRoute('achievements', {
         }
         const years = data.years || [];
         if (!years.length) {
-            container.innerHTML = '<div class="empty">暂无成就数据，点击右上角「新增年份」开始吧</div>';
+            container.innerHTML = '<div class="empty">暂无足迹数据，点击右上角「新增年份」开始吧</div>';
             return;
         }
 
@@ -39,7 +39,7 @@ registerRoute('achievements', {
             <div class="panel year-panel">
                 <div class="year-head">
                     <h2>${esc(year.year)} <span class="muted">(${(year.items || []).length} 条)</span></h2>
-                    <button class="btn btn-sm" data-add-year="${esc(year.year)}">+ 添加成就</button>
+                    <button class="btn btn-sm" data-add-year="${esc(year.year)}">+ 添加足迹</button>
                 </div>
                 <div class="year-items">
                     ${(year.items || []).map((item, idx) => `
@@ -55,7 +55,7 @@ registerRoute('achievements', {
                                 <button class="btn btn-sm" data-edit="${idx}" data-year="${esc(year.year)}">编辑</button>
                                 <button class="btn btn-sm btn-danger" data-del="${idx}" data-year="${esc(year.year)}">删除</button>
                             </div>
-                        </div>`).join('') || '<div class="empty">该年份暂无成就</div>'}
+                        </div>`).join('') || '<div class="empty">该年份暂无足迹</div>'}
                 </div>
             </div>`).join('');
 
@@ -72,7 +72,7 @@ registerRoute('achievements', {
         });
         container.querySelectorAll('[data-del]').forEach((btn) => {
             btn.onclick = async () => {
-                const ok = await confirmDialog('确定删除这条成就吗？', { title: '删除成就', danger: true });
+                const ok = await confirmDialog('确定删除这条足迹吗？', { title: '删除足迹', danger: true });
                 if (!ok) return;
                 try {
                     await api(`/achievements/${btn.dataset.year}/${btn.dataset.del}`, { method: 'DELETE' });
@@ -84,7 +84,7 @@ registerRoute('achievements', {
     },
 });
 
-/** 成就编辑器（新建 / 编辑共用） */
+/** 足迹编辑器（新建 / 编辑共用） */
 async function openAchievementEditor({ year, item, index }) {
     const isNew = !item;
     const base = item || { title: '', emoji: '⭐', description: '', date: `${year}-01-01`, tags: [], images: [] };
@@ -92,7 +92,7 @@ async function openAchievementEditor({ year, item, index }) {
     try { tagSuggest = (await api('/tags')).map((t) => t.name); } catch (e) { /* ignore */ }
 
     const { box } = openModal(`
-        <div class="modal-head">${isNew ? `新增成就（${esc(year)}）` : '编辑成就'}</div>
+        <div class="modal-head">${isNew ? `新增足迹（${esc(year)}）` : '编辑足迹'}</div>
         <div class="modal-body form-grid">
             <div class="field"><span>标题 *</span><input class="input" id="ac-title" value="${esc(base.title)}"></div>
             <div class="field"><span>Emoji</span><input class="input" id="ac-emoji" value="${esc(base.emoji || '')}"></div>

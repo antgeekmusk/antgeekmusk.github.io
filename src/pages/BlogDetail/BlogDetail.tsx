@@ -180,7 +180,7 @@ const BlogDetail: React.FC = () => {
             {/*博客头部*/}
             <BlogHeader colorChangeFlag={false}/>
             {/*博客内容*/}
-            <Content className="blog-detail-container">
+            <Content className={`blog-detail-container${!isSidebarVisible ? ' sidebar-collapsed' : ''}`}>
                 {blog ? (
                     <div className="blog-detail-content">
                         <Title level={1} style={{textAlign: "center"}}>{blog.title}</Title>

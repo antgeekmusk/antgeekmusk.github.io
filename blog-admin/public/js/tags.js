@@ -27,7 +27,7 @@ registerRoute('tags', {
             return;
         }
         if (!list.length) {
-            container.innerHTML = '<div class="empty">暂无 Tag，去文章 / 成就 / 作品集里添加吧</div>';
+            container.innerHTML = '<div class="empty">暂无 Tag，去文章 / 足迹 / 作品集里添加吧</div>';
             return;
         }
 
@@ -35,7 +35,7 @@ registerRoute('tags', {
             <div class="panel">
                 <div class="panel-tools">
                     <input class="input input-search" id="tag-search" placeholder="搜索 Tag…">
-                    <span class="muted">共 ${list.length} 个 Tag（来源：文章 / 成就 / 作品集）</span>
+                    <span class="muted">共 ${list.length} 个 Tag（来源：文章 / 足迹 / 作品集）</span>
                 </div>
                 <div class="table-wrap">
                     <table class="table">
@@ -58,7 +58,7 @@ registerRoute('tags', {
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-foot muted">💡 颜色仅支持 antd 预设色；Tag 列表由文章 / 成就 / 作品集中的标签自动汇总。</div>
+                <div class="panel-foot muted">💡 颜色仅支持 antd 预设色；Tag 列表由文章 / 足迹 / 作品集中的标签自动汇总。</div>
             </div>`;
 
         container.querySelector('#tag-search').addEventListener('input', (e) => {

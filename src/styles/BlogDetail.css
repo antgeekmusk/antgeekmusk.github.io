@@ -1,82 +1,103 @@
+/* ==================== 博客详情页 ==================== */
 .blog-detail {
-    width: 75%;
-    min-width: 100vw;
+    width: 100%;
     min-height: 100vh;
 }
+
 .blog-detail-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    gap: 24px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 30%, #eef2ff 60%, #f8fafc 100%);
+    background-size: 400% 400%;
+    animation: bgShift 20s ease infinite;
     margin-top: 95px;
-    padding-top: 15px;
-    gap: 10px;
-    min-height: calc(100vh - 1%);
-    margin-bottom: 1%;
+    padding: 28px 24px 40px;
+    min-height: calc(100vh - 95px);
+}
+
+@keyframes bgShift {
+    0%, 100% { background-position: 0% 50%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
 }
 
 .blog-detail-content {
-    width: 56%;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 0 1 680px;
+    min-width: 0;
+    max-width: 680px;
+    background: rgba(255, 255, 255, .78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, .5);
+    padding: 28px 32px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, .06);
     margin-bottom: 20px;
+    transition: max-width .35s ease, box-shadow .35s ease;
+}
+.blog-detail-content:hover {
+    box-shadow: 0 8px 32px rgba(99, 102, 241, .1);
 }
 
-.blog-sidebar {
-    width: 25%;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+/* 收起侧边栏 → 内容展宽 */
+.blog-detail-container.sidebar-collapsed .blog-detail-content {
+    flex-basis: 900px;
+    max-width: 900px;
 }
 
 .blog-meta {
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    gap: 10px; /* Adds spacing between items */
+    gap: 10px;
     color: #666;
-    font-size: 15px; /* Adjust font size for better readability */
+    font-size: 15px;
 }
 .blog-meta > div {
     display: flex;
-    flex-wrap: wrap; /* Ensures tags wrap on smaller screens */
-    gap: 5px; /* Adds spacing between tags */
+    flex-wrap: wrap;
+    gap: 5px;
 }
-
 .blog-meta span {
-    font-weight: bold; /* Highlights labels like "标签" and "专栏" */
+    font-weight: bold;
     margin-right: 5px;
 }
 
 .blog-body {
     font-size: 16px;
-    line-height: 1.6;
-    word-wrap: break-word; /* Ensures long words break to the next line */
-    word-break: break-word; /* Breaks long words if necessary */
-    overflow-wrap: break-word; /* Ensures text wraps within the container */
+    line-height: 1.65;
+    color: #334155;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
-/* 行内代码块自动换行 (没有 class 属性的 <code>) */
 .blog-body code:not([class]) {
-    white-space: pre-wrap; /* 允许换行 */
-    word-wrap: break-word; /* 长单词换行 */
-    overflow-wrap: break-word; /* 兼容性处理 */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
-
-/* 普通代码块保持不换行 (有 class 属性的 <code>) */
 .blog-body code[class] {
-    white-space: pre; /* 禁止换行 */
-    overflow-x: auto; /* 添加水平滚动条 */
+    white-space: pre;
+    overflow-x: auto;
 }
 
 @media (max-width: 768px) {
-    .blog-detail-content {
-        width: 95%;
+    .blog-detail-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 8px 30px;
+        gap: 0;
     }
-
-    .blog-sidebar {
-        display: none;
+    .blog-detail-content {
+        max-width: 100%;
+        padding: 20px 16px;
+    }
+    .blog-detail-container.sidebar-collapsed .blog-detail-content {
+        max-width: 100%;
     }
 }

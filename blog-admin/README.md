@@ -1,6 +1,6 @@
 # blog-admin · 博客后台管理系统
 
-一个 Node.js 前后端一体的博客管理工具：通过浏览器页面管理本站的文章、成就、专栏、Tag、作品集等数据。
+一个 Node.js 前后端一体的博客管理工具：通过浏览器页面管理本站的文章、足迹、专栏、Tag、作品集等数据。
 
 - 后端：Node.js + Express（REST API，读写站点 `public/data/` 下的数据文件）
 - 前端：原生 HTML / CSS / JS（无需构建，打开即用）
@@ -36,11 +36,11 @@ npm start          # 启动服务
 | 模块 | 能力 |
 | --- | --- |
 | 📄 文章管理 | 查看 / 新建 / 编辑 / 删除文章；编辑 Markdown 正文（带预览）；上传图片到文章目录；修改日期会自动移动文章目录，修改标题会自动重命名正文文件 |
-| 🏆 成就管理 | 按年份分组管理成就（标题、emoji、日期、描述、Tag、图片）；上传成就图片；编辑成就页个人介绍 |
+| 👣 足迹管理 | 按年份分组管理足迹（标题、emoji、日期、描述、Tag、图片）；上传足迹图片；编辑足迹页个人介绍 |
 | 📚 专栏管理 | 新增 / 重命名 / 排序 / 删除专栏；删除与重命名会同步更新引用它的文章 |
-| 🏷️ Tag 管理 | 自动汇总全站 Tag（文章 / 成就 / 作品集）及使用次数；为 Tag 设置 antd 预设颜色 |
-| 💼 作品集管理 | 同成就管理，额外支持作品页面路由 route 字段 |
-| ⚙️ 站点设置 | 编辑成就页 / 作品集页的 myInfo.md；查看数据目录；下载数据备份 |
+| 🏷️ Tag 管理 | 自动汇总全站 Tag（文章 / 足迹 / 作品集）及使用次数；为 Tag 设置 antd 预设颜色 |
+| 💼 作品集管理 | 同足迹管理，额外支持作品页面路由 route 字段 |
+| ⚙️ 站点设置 | 编辑足迹页 / 作品集页的 myInfo.md；查看数据目录；下载数据备份 |
 
 ## 数据文件说明
 
@@ -52,7 +52,7 @@ npm start          # 启动服务
 | `public/data/blog/content/{日期}/{id}/*.md` | 文章 Markdown 正文 + 图片 |
 | `public/data/blog/columns_config.json` | 专栏配置（name、order） |
 | `public/data/blog/tag_color_config.json` | Tag 颜色映射 |
-| `public/data/achievement/achievement.json` | 成就数据（按年份分组） |
+| `public/data/achievement/achievement.json` | 足迹数据（按年份分组） |
 | `public/data/portfolio/portfolio.json` | 作品集数据（按年份分组） |
 | `public/data/achievement/myInfo.md`、`public/data/portfolio/myInfo.md` | 页面顶部个人介绍 |
 
@@ -68,10 +68,10 @@ npm start          # 启动服务
 | PUT/DELETE | `/api/columns/:name` | 更新 / 删除专栏 |
 | GET | `/api/tags` | Tag 汇总列表 |
 | PUT/DELETE | `/api/tags/:name` | 设置 / 清除 Tag 颜色 |
-| GET/POST | `/api/achievements` | 成就列表 / 新增 |
-| PUT/DELETE | `/api/achievements/:year/:index` | 更新 / 删除成就 |
-| POST | `/api/achievements/images` | 上传成就图片 |
-| PUT | `/api/achievements/myinfo` | 保存成就页个人介绍 |
+| GET/POST | `/api/achievements` | 足迹列表 / 新增 |
+| PUT/DELETE | `/api/achievements/:year/:index` | 更新 / 删除足迹 |
+| POST | `/api/achievements/images` | 上传足迹图片 |
+| PUT | `/api/achievements/myinfo` | 保存足迹页个人介绍 |
 | GET/POST | `/api/portfolio` | 作品集列表 / 新增 |
 | PUT/DELETE | `/api/portfolio/:year/:index` | 更新 / 删除作品 |
 | POST | `/api/portfolio/images` | 上传作品图片 |

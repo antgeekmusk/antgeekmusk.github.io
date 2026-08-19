@@ -1,0 +1,116 @@
+/* ==================== 页脚 ==================== */
+.site-footer {
+    position: relative;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #3730a3 100%) !important;
+    color: #c7d2fe !important;
+    padding: 40px 10% 24px !important;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+/* 顶部发光分割线 */
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 5%; right: 5%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #818cf8, #a78bfa, #818cf8, transparent);
+    animation: footerGlow 4s ease-in-out infinite;
+}
+@keyframes footerGlow {
+    0%, 100% { opacity: .5; }
+    50% { opacity: 1; }
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-bottom: 20px;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e0e7ff;
+}
+.footer-tagline {
+    font-size: 13px;
+    color: #a5b4fc;
+    margin: 2px 0 0 0;
+}
+
+.footer-links {
+    flex-direction: row;
+    gap: 24px;
+}
+.footer-link {
+    color: #c7d2fe;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color .25s ease, text-shadow .25s ease;
+    position: relative;
+}
+.footer-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 0; height: 1.5px;
+    background: #a78bfa;
+    transition: width .3s ease;
+}
+.footer-link:hover {
+    color: #e0e7ff;
+    text-shadow: 0 0 12px rgba(167,139,250,.5);
+}
+.footer-link:hover::after {
+    width: 100%;
+}
+
+.footer-icon-link {
+    color: #c7d2fe;
+    font-size: 24px;
+    transition: color .25s ease, transform .25s ease, text-shadow .25s ease;
+}
+.footer-icon-link:hover {
+    color: #e0e7ff;
+    transform: translateY(-2px);
+    text-shadow: 0 0 16px rgba(167,139,250,.6);
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    color: #818cf8;
+    padding-top: 16px;
+    border-top: 1px solid rgba(129,140,248,.2);
+}
+.heart-icon {
+    color: #f43f5e;
+    animation: heartBeat 1.2s ease-in-out infinite;
+    font-size: 14px;
+    margin: 0 2px;
+    vertical-align: -1px;
+}
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    .site-footer { margin-top: 0; padding: 30px 5% 16px !important; }
+    .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+    .footer-links { flex-direction: column; gap: 12px; align-items: center; }
+}

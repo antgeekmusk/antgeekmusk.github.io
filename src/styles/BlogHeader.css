@@ -1,3 +1,31 @@
+/* ==================== 主头部容器 ==================== */
+.site-header {
+    transition: background-color 0.45s ease, box-shadow 0.45s ease, backdrop-filter 0.45s ease;
+}
+
+/* 初始 / hero 页 — 透明 */
+.header-hero {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* 滚动后 — 毛玻璃 */
+.header-scrolled {
+    background: rgba(255, 255, 255, .72) !important;
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: 0 2px 16px rgba(99, 102, 241, .08), 0 0 0 1px rgba(139, 92, 246, .08) !important;
+}
+
+/* 不需要颜色切换的页面（固定白色） */
+.site-header:not(.header-hero) {
+    background: rgba(255, 255, 255, .72);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: 0 2px 16px rgba(99, 102, 241, .06), 0 0 0 1px rgba(139, 92, 246, .06);
+}
+
+/* ==================== 内容区 ==================== */
 .header-content {
     height: 95px;
     display: flex;
@@ -5,7 +33,8 @@
     padding: 0 10%;
 }
 
-.h-left{
+/* ==================== 左侧 logo ==================== */
+.h-left {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -13,30 +42,44 @@
 .h-left-logo {
     height: 100%;
     width: 50%;
-    aspect-ratio: 1/1; /*保证始终是正方形*/
+    aspect-ratio: 1/1;
     background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
+    transition: filter 0.3s ease;
 }
-
 .h-left-text {
     height: 100%;
     width: 50%;
     display: flex;
     align-items: center;
-}
-.h-left a{
-    display: block;
-    width: 100%;
-    height: 100%;
+    margin-left: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
+/* hero 页透明背景时用白色文字 */
+.header-hero:not(.header-scrolled) .h-left-text {
+    background: none;
+    -webkit-text-fill-color: white;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.header-hero:not(.header-scrolled) .h-left-logo {
+    filter: brightness(0) invert(1);
+    /* logo-white.png 已经处理，这里做兜底 */;
+}
+
+/* ==================== 中间导航 ==================== */
 .h-middle {
     width: 80%;
 }
 .h-middle ul {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     height: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -44,87 +87,89 @@
 }
 .h-middle ul li {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    background: none;
-    border: none;
     font-size: 18px;
-    font-weight: bold;
-    color: white;
-}
-
-.h-middle>ul>li:hover {
+    font-weight: 600;
+    color: #374151;
+    padding: 6px 14px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: color 0.25s ease, background 0.25s ease, text-shadow 0.25s ease;
+}
+.h-middle ul li:hover {
+    color: #6366f1;
+    background: rgba(99, 102, 241, .08);
+    text-shadow: 0 0 16px rgba(99, 102, 241, .25);
 }
 
-.h-right {
-    aspect-ratio: 1/1; /*保证始终是正方形*/
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+/* hero 页透明时导航白色 */
+.header-hero:not(.header-scrolled) .h-middle ul li {
+    color: rgba(255, 255, 255, .9);
+}
+.header-hero:not(.header-scrolled) .h-middle ul li:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .15);
+    text-shadow: 0 0 20px rgba(255, 255, 255, .5);
 }
 
-.desktop-menu {
-    display: flex;
-}
-
-.mobile-menu-button {
-    display: none;
-}
-
-.mobile-menu-button:hover {
-    background: transparent !important; /*去掉hover效果*/
-}
-
+/* ==================== 移动端菜单（桌面端隐藏） ==================== */
 .h-mobile-menu {
     display: none;
 }
 
+/* ==================== 右侧按钮（Github / 语言） ==================== */
+.h-right {
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.h-right .ant-btn {
+    color: #374151 !important;
+    transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.2s ease;
+}
+.h-right .ant-btn:hover {
+    color: #6366f1 !important;
+    text-shadow: 0 0 12px rgba(99, 102, 241, .3);
+    transform: translateY(-1px);
+}
 
+/* hero 页透明时按钮白色 */
+.header-hero:not(.header-scrolled) .h-right .ant-btn {
+    color: rgba(255, 255, 255, .9) !important;
+}
+.header-hero:not(.header-scrolled) .h-right .ant-btn:hover {
+    color: #fff !important;
+    text-shadow: 0 0 20px rgba(255, 255, 255, .5);
+}
 
+/* ==================== 移动端 ==================== */
 @media (max-width: 768px) {
-    .desktop-menu {
-        display: none;
-    }
-
-    .mobile-menu-button {
-        background: transparent;
-        border: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 50%;
-        height: 50%;
-        font-size: 50px;
-        padding: 0;
-        cursor: pointer;
-        color: white;
-        box-shadow: none;
-    }
-
-    .h-middle {
-        display: none;
-    }
-
-    .h-right {
-        display: none;
-    }
-
+    .h-middle { display: none; }
+    .h-right { display: none; }
     .h-mobile-menu {
         display: flex;
         width: 80%;
         align-items: center;
     }
     .header-content {
-        height: 95px;
-        display: flex;
-        flex-direction: row;
-        padding: 0 0;
-
+        padding: 0;
     }
-
     .mobile-menu-button {
         margin-left: auto;
+        background: transparent !important;
+        border: none !important;
+        width: auto;
+        height: auto;
+        padding: 8px;
+        cursor: pointer;
+        box-shadow: none !important;
+    }
+    .mobile-menu-button .anticon {
+        font-size: 28px;
+        color: #374151;
+    }
+    .mobile-menu-button:hover .anticon {
+        color: #6366f1;
     }
 
     .h-mobile-menu-nav {
@@ -132,9 +177,13 @@
         font-weight: bold;
         color: black;
     }
-
-    .h-mobile-menu-nav>p:hover {
+    .h-mobile-menu-nav > p:hover {
         cursor: pointer;
+        color: #6366f1;
     }
 
+    /* hero透明时移动端按钮白色 */
+    .header-hero:not(.header-scrolled) .mobile-menu-button .anticon {
+        color: white;
+    }
 }

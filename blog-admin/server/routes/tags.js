@@ -10,7 +10,7 @@ const router = express.Router();
 /** antd Tag 预设颜色（与前端 antd 组件一致） */
 const VALID_COLORS = ['magenta', 'red', 'volcano', 'orange', 'gold', 'lime', 'green', 'cyan', 'blue', 'geekblue', 'purple'];
 
-/** 收集全站（文章/成就/作品集）所有用到的 Tag */
+/** 收集全站（文章/足迹/作品集）所有用到的 Tag */
 function collectAllTags() {
     const usage = {};
     const add = (tag) => { usage[tag] = (usage[tag] || 0) + 1; };

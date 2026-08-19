@@ -2,7 +2,7 @@
   "name": "blog-admin",
   "version": "1.0.0",
   "private": true,
-  "description": "博客后台管理系统：通过网页管理文章、成就、专栏、Tag、作品集等数据",
+  "description": "博客后台管理系统：通过网页管理文章、足迹、专栏、Tag、作品集等数据",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",

@@ -1,77 +1,289 @@
+/* ==================== 整体背景 + 装饰光斑 ==================== */
 .about-me {
     padding-top: 120px;
+    padding-bottom: 80px;
     padding-left: 15%;
     padding-right: 15%;
-    background-color: white;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8eef8 25%, #f5f7fa 50%, #eef1f9 75%, #f0f4ff 100%);
+    background-size: 400% 400%;
+    animation: bgShift 20s ease infinite;
+    position: relative;
+    overflow: hidden;
 }
 
+@keyframes bgShift {
+    0%, 100% { background-position: 0% 50%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+}
+
+/* 浮动光斑 */
+.bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+.bg-blob-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, #a78bfa 0%, #c4b5fd 40%, transparent 70%);
+    top: -120px; right: -10%;
+    animation: blobFloat1 18s ease-in-out infinite;
+}
+.bg-blob-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, #60a5fa 0%, #93c5fd 40%, transparent 70%);
+    bottom: 10%; left: -5%;
+    animation: blobFloat2 22s ease-in-out infinite;
+}
+@keyframes blobFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -30px) scale(1.08); }
+    66% { transform: translate(-20px, 20px) scale(0.94); }
+}
+@keyframes blobFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-30px, 20px) scale(1.06); }
+    66% { transform: translate(25px, -15px) scale(0.92); }
+}
+
+/* ==================== 自我介绍 ==================== */
 .self-introduction {
     margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
 }
 
+/* ==================== 足迹头部 ==================== */
 .achievement-wall {
     margin-top: 40px;
+    position: relative;
+    z-index: 1;
 }
 
-/* 成就卡片图片容器（单图 + 覆盖层） */
-.achievement-images {
-    margin-top: 12px;
+.wall-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
 }
 
-.achievement-image-wrapper {
+.wall-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+.title-icon {
+    color: #8b5cf6;
+    -webkit-text-fill-color: #8b5cf6;
+    font-size: 32px;
+    margin-right: 4px;
+    animation: iconBounce 2s ease-in-out infinite;
+}
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* ==================== 时间轴 ==================== */
+
+/* 时间线圆点 —— 发光脉冲 */
+.timeline-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #6366f1, #a78bfa, #818cf8, #6366f1);
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+    animation: dotPulse 2.5s ease-in-out infinite;
+}
+.dot-inner {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #fff;
+}
+@keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(99,102,241,.4); }
+    50% { box-shadow: 0 0 22px rgba(139,92,246,.7), 0 0 40px rgba(99,102,241,.25); }
+}
+
+/* 时间线连线 */
+.ant-timeline .ant-timeline-item-tail {
+    border-left: 2px dashed rgba(99, 102, 241, .35) !important;
+}
+
+/* 年份标题 —— 渐变文字 */
+.achievement-year {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0 0 14px 4px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+}
+
+/* ==================== 足迹卡片（毛玻璃） ==================== */
+.achievement-card {
+    background: rgba(255, 255, 255, .62) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, .5) !important;
+    border-radius: 14px !important;
+    transition: all .35s cubic-bezier(.25,.46,.45,.94) !important;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+
+    /* 初始隐藏 → IntersectionObserver 触发 */
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(2px);
+}
+
+.achievement-card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, transparent 40%, rgba(139,92,246,.3), transparent 80%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity .4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+.achievement-card:hover::before {
+    opacity: 1;
+}
+
+.achievement-card:hover {
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: 0 18px 36px rgba(99,102,241,.15), 0 4px 12px rgba(0,0,0,.06) !important;
+    background: rgba(255,255,255,.78) !important;
+}
+
+.achievement-card .ant-card-head {
+    border-bottom: 1px solid rgba(139,92,246,.12) !important;
+}
+.achievement-card .ant-card-head-title {
+    white-space: normal;
+    word-wrap: break-word;
+    font-weight: 600;
+}
+
+/* 标签 */
+.card-tags {
+    margin-bottom: 6px;
+}
+
+/* 日期 */
+.card-date {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+/* 描述 */
+.card-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+/* ==================== 卡片图片 ==================== */
+.card-images {
+    margin-top: 8px;
+}
+
+.card-img-box {
     position: relative;
     display: inline-block;
     width: 100%;
-    max-width: 200px;
-    border-radius: 8px;
+    max-width: 220px;
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
 }
 
-.achievement-image-wrapper img {
+.card-img-box img {
     display: block;
     width: 100%;
-    height: 140px;
+    height: 150px;
     object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.25s ease;
+    border-radius: 10px;
+    transition: transform .5s ease, filter .4s ease;
 }
 
-.achievement-card:hover .achievement-image-wrapper img {
-    transform: scale(1.05);
+.achievement-card:hover .card-img-box img {
+    transform: scale(1.08);
+    filter: brightness(1.05);
 }
 
-.image-overlay {
+/* 图片光泽扫过 */
+.card-img-shine {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+    transform: skewX(-15deg);
+    pointer-events: none;
+}
+.achievement-card:hover .card-img-shine {
+    animation: shine .8s ease forwards;
+}
+@keyframes shine {
+    to { left: 120%; }
+}
+
+/* +N 覆盖层 */
+.img-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 42, 0.55);
+    background: rgba(15, 23, 42, .52);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 22px;
-    font-weight: 600;
-    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 700;
     letter-spacing: 1px;
-    gap: 4px;
+    gap: 6px;
+    border-radius: 10px;
 }
 
-.achievement-card {
-    cursor: pointer;
-    transition: box-shadow 0.2s ease;
+/* ==================== 详情弹窗 ==================== */
+.detail-modal .ant-modal-content {
+    border-radius: 16px !important;
+    overflow: hidden;
 }
 
-.achievement-card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.achievement-card .ant-card-head-title {
-    white-space: normal;
-    word-wrap: break-word;
-}
-
-/* 详情弹窗样式 */
-.detail-modal-body {
+.detail-body {
     padding: 4px 0;
 }
 
@@ -80,22 +292,22 @@
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 }
 
 .detail-date {
-    color: #666;
+    color: #888;
     font-size: 14px;
 }
 
-.detail-description {
+.detail-desc {
     font-size: 15px;
-    line-height: 1.7;
+    line-height: 1.75;
     color: #333;
     margin-bottom: 20px;
 }
 
-.detail-description p {
+.detail-desc p {
     margin-bottom: 10px;
 }
 
@@ -109,23 +321,36 @@
 .detail-images img {
     width: 100%;
     height: auto;
-    max-height: 400px;
+    max-height: 420px;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 10px;
     background: #f5f5f5;
     cursor: zoom-in;
+    transition: transform .2s ease;
+}
+.detail-images img:hover {
+    transform: scale(1.03);
 }
 
+/* ==================== 移动端 ==================== */
 @media (max-width: 768px) {
     .ant-col {
-        flex: 0 0 100%;
-        max-width: 100%;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
     }
 
     .about-me {
-        padding-top: 120px;
+        padding-top: 100px;
         padding-left: 5%;
         padding-right: 5%;
+    }
+
+    .wall-title {
+        font-size: 26px;
+    }
+
+    .achievement-year {
+        font-size: 22px;
     }
 
     .detail-images {

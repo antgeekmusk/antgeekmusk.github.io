@@ -15,7 +15,7 @@ registerRoute('settings', {
         container.innerHTML = `
             <div class="panel">
                 <h2>📝 我的介绍（"关于我" / "作品集" 页顶部展示）</h2>
-                <div class="field"><span>成就页 myInfo.md</span>
+                <div class="field"><span>足迹页 myInfo.md</span>
                     <textarea class="input editor-area editor-area-sm" id="set-ach">${esc(info.achievementMyInfo)}</textarea>
                 </div>
                 <div class="field"><span>作品集页 myInfo.md</span>
@@ -34,7 +34,7 @@ registerRoute('settings', {
                     <a class="btn" href="/data/blog/blogs_config.json" download>下载 文章配置</a>
                     <a class="btn" href="/data/blog/columns_config.json" download>下载 专栏配置</a>
                     <a class="btn" href="/data/blog/tag_color_config.json" download>下载 Tag 颜色</a>
-                    <a class="btn" href="/data/achievement/achievement.json" download>下载 成就数据</a>
+                    <a class="btn" href="/data/achievement/achievement.json" download>下载 足迹数据</a>
                     <a class="btn" href="/data/portfolio/portfolio.json" download>下载 作品集数据</a>
                 </div>
             </div>

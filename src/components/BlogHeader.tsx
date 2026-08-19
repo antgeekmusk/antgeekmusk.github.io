@@ -17,21 +17,14 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
     const [language, setLanguage] = useState('en');
     const navigate = useNavigate();
     // 头部样
+    const isScrolled = colorChangeFlag && scrollPosition > 10;
+    const headerClass = `site-header${colorChangeFlag ? ' header-hero' : ''}${isScrolled ? ' header-scrolled' : ''}`;
     const headerStyle: React.CSSProperties = {
-            position: 'fixed',
-            textAlign: 'center',
-            color: '#f000',
-            height: 95,
-            width: '100vw',
-            backgroundColor: colorChangeFlag ? (scrollPosition>10 ? 'white' : 'transparent') : 'white',
-            boxShadow: colorChangeFlag ? (scrollPosition>10 ? '0 2px 8px rgba(0,0,0,0.06)' : 'none') : '0 2px 8px rgba(0,0,0,0.06)',
-            transition: 'background-color 0.5s ease, box-shadow 0.5s ease',
-            zIndex: 1000,
-        };
-    // 导航栏字体颜色
-    const navFontStyle: React.CSSProperties = {
-        color: colorChangeFlag ? (scrollPosition>0? 'black' : 'white') : "black",
-    }
+        position: 'fixed',
+        height: 95,
+        width: '100vw',
+        zIndex: 1000,
+    };
     // logo图片
     const logoImage = colorChangeFlag ? (scrollPosition > 0 ? 'logo.png' : 'logo-white.png') : 'logo.png';
     // 监听滚动事件
@@ -77,7 +70,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
     };
 
     return (
-        <Header style={headerStyle}>
+        <Header className={headerClass} style={headerStyle}>
             <Content className={"header-content"}>
                 {/*头像位置*/}
                 <Content
@@ -89,23 +82,21 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
                         style={{backgroundImage: `url(/${logoImage})`}}
                         >
                     </div>
-                    <div
-                        className={"h-left-text"}
-                        style={{ marginLeft: '10px', fontSize: '24px', color: colorChangeFlag ? (scrollPosition > 0 ? 'black' : 'white') : 'black' }}>
+                    <div className={"h-left-text"}>
                         Antgeek
                     </div>
                 </Content>
                 {/*导航栏*/}
                 <Content className={"h-middle"}>
                     <ul>
-                        <li style={navFontStyle} onClick={handleLogoClick}>博客</li>
-                        <li style={navFontStyle} onClick={handleAboutMeClick}>关于我</li>
-                        <li style={navFontStyle} onClick={handlePortfolioClick}>作品集</li>
+                        <li onClick={handleLogoClick}>博客</li>
+                        <li onClick={handleAboutMeClick}>关于我</li>
+                        <li onClick={handlePortfolioClick}>作品集</li>
                     </ul>
                 </Content>
                 {/*移动端导航栏*/}
                 <Content className={"h-mobile-menu"}>
-                    <Button size={"large"} className={"mobile-menu-button"} style={{color: `${colorChangeFlag ? (scrollPosition > 0 ? 'black' : 'white') : 'black'}`}} type="primary" icon={<MenuOutlined />} onClick={showDrawer} />
+                    <Button size={"large"} className={"mobile-menu-button"} type="text" icon={<MenuOutlined />} onClick={showDrawer} />
                     <Drawer
                         title="导航"
                         placement="right"

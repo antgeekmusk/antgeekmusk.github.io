@@ -298,7 +298,7 @@ code { background: #f1f5f9; padding: 1px 5px; border-radius: 4px; font-size: 12p
 .editor-preview ul, .editor-preview ol { padding-left: 22px; }
 .editor-preview a { color: var(--primary); }
 
-/* ---------- 成就/作品集 ---------- */
+/* ---------- 足迹/作品集 ---------- */
 .year-panel { }
 .year-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .year-head h2 { margin: 0; font-size: 16px; }
