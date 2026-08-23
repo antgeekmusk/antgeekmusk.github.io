@@ -8,7 +8,7 @@
         "description": "今天我俩在多伦办回门席",
         "date": "2026-08-21",
         "tags": ["与圆圆","重要的日子"],
-        "images": []
+        "images": ["/data/achievement/images/回多伦办席_1.jpg","/data/achievement/images/回多伦办席_2.jpg","/data/achievement/images/回多伦办席_3.jpg","/data/achievement/images/回多伦办席_4.jpg","/data/achievement/images/回多伦办席_5.jpg"]
       },
       {
         "title": "婚礼",
@@ -26,10 +26,18 @@
       {
         "title": "打卡 吉林-长白山",
         "emoji": "📍",
-        "description": "与圆圆一起打卡了长白山，我们非常幸运，20号的前几天因为天气原因长白山顶峰一直没有开放，20号当天天气非常好，我们成功登顶，我们走了之后峰顶又因天气原因关闭了。\n\n这里的空气非常好，真想在某个夏天在这里长居几个月",
+        "description": "与圆圆一起打卡了长白山，我们非常幸运，20号的前几天因为天气原因长白山顶峰一直没有开放，20号当天天气非常好，我们成功登顶，我们走了之后峰顶又因天气原因关闭了。\r\n\r\n这里的空气非常好，真想在某个夏天在这里长居几个月\r\n\r\n对了，吃了高丽火盆，圆圆一氧化碳中毒了，避雷",
         "date": "2025-01-20",
         "tags": ["与圆圆","旅行"],
-        "images": ["/data/achievement/images/长白山.JPG"]
+        "images": ["/data/achievement/images/打卡 吉林-长白山_1.JPG","/data/achievement/images/打卡 吉林-长白山_2.png","/data/achievement/images/打卡 吉林-长白山_3.png","/data/achievement/images/打卡 吉林-长白山_4.png","/data/achievement/images/打卡 吉林-长白山_5.png","/data/achievement/images/打卡 吉林-长白山_6.png","/data/achievement/images/打卡 吉林-长白山_7.png","/data/achievement/images/打卡 吉林-长白山_8.png","/data/achievement/images/打卡 吉林-长白山_9.png","/data/achievement/images/打卡 吉林-长白山_10.png","/data/achievement/images/打卡 吉林-长白山_11.png","/data/achievement/images/打卡 吉林-长白山_12.png","/data/achievement/images/打卡 吉林-长白山_13.png","/data/achievement/images/打卡 吉林-长白山_14.png","/data/achievement/images/打卡 吉林-长白山_15.png","/data/achievement/images/打卡 吉林-长白山_16.png","/data/achievement/images/打卡 吉林-长白山_17.png","/data/achievement/images/打卡 吉林-长白山_18.png","/data/achievement/images/打卡 吉林-长白山_19.png"]
+      },
+      {
+        "title": "打卡吉林长春",
+        "emoji": "📍",
+        "description": "早市\r\n百年老店\r\n二人转\r\n\r\n第二天\r\n伪满皇宫博物馆\r\n这有山\r\n长春冰雪大世界\r\n小狐狸30一位\r\n夕阳下亲嘴\r\n黑白手套比心\r\n晚上的冰灯\r\n不信邪舔冰灯\r\n拜见大王\r\n还玩了拖拉机车没敢拍照片\r\n",
+        "date": "2025-01-17",
+        "tags": ["与圆圆","旅行"],
+        "images": ["/data/achievement/images/打卡吉林长春_1.png","/data/achievement/images/打卡吉林长春_2.png","/data/achievement/images/打卡吉林长春_3.png","/data/achievement/images/打卡吉林长春_4.png","/data/achievement/images/打卡吉林长春_5.png","/data/achievement/images/打卡吉林长春_6.png","/data/achievement/images/打卡吉林长春_7.png","/data/achievement/images/打卡吉林长春_8.png","/data/achievement/images/打卡吉林长春_9.png","/data/achievement/images/打卡吉林长春_10.png","/data/achievement/images/打卡吉林长春_11.png","/data/achievement/images/打卡吉林长春_12.png","/data/achievement/images/打卡吉林长春_13.png","/data/achievement/images/打卡吉林长春_14.png","/data/achievement/images/打卡吉林长春_15.png","/data/achievement/images/打卡吉林长春_16.png","/data/achievement/images/打卡吉林长春_17.png","/data/achievement/images/打卡吉林长春_18.png"]
       },
       {
         "title": "《猎罪图鉴2》",
@@ -46,6 +54,14 @@
         "date": "2025-01-16",
         "tags": ["与圆圆","动漫"],
         "images": ["/data/achievement/images/斗破苍穹.jpeg"]
+      },
+      {
+        "title": "与圆圆的第一个元旦",
+        "emoji": "⭐",
+        "description": "元旦我们一起做了焖面\r\n当时在俸伯的小出租屋中\r\n手艺欠佳，但是好吃",
+        "date": "2025-01-01",
+        "tags": ["与圆圆"],
+        "images": ["/data/achievement/images/与圆圆的第一个元旦_1.png"]
       }
     ]
   },
@@ -53,11 +69,68 @@
     "year": "2024",
     "items": [
       {
+        "title": "我们第一次跨年",
+        "emoji": "💖",
+        "description": "我们第一次跨年，在北京的奥特莱斯，一起倒计时跨新年",
+        "date": "2024-12-31",
+        "tags": ["与圆圆","重要的日子"],
+        "images": ["/data/achievement/images/我们第一次跨年_1.png","/data/achievement/images/我们第一次跨年_2.png","/data/achievement/images/我们第一次跨年_3.png"]
+      },
+      {
+        "title": "普通的一天我们逛超市",
+        "emoji": "⭐",
+        "description": "普通的一天我们逛超市，拍了个很好看的照片。",
+        "date": "2024-12-28",
+        "tags": ["与圆圆"],
+        "images": ["/data/achievement/images/普通的一天我们逛超市_1.png"]
+      },
+      {
         "title": "与圆圆在冬至这天一起包饺子",
         "emoji": "💖",
-        "description": "冬至这天,和圆圆一起包饺子看动漫\n\n这一天很开心,很温馨",
+        "description": "冬至这天,和圆圆一起包饺子看动漫\r\n\r\n还去了北京工艺美术馆\r\n\r\n这一天很开心,很温馨",
         "date": "2024-12-21",
-        "tags": ["与圆圆"]
+        "tags": ["与圆圆"],
+        "images": ["/data/achievement/images/与圆圆在冬至这天一起包饺子_1.png","/data/achievement/images/与圆圆在冬至这天一起包饺子_2.png","/data/achievement/images/与圆圆在冬至这天一起包饺子_3.png","/data/achievement/images/与圆圆在冬至这天一起包饺子_4.png","/data/achievement/images/与圆圆在冬至这天一起包饺子_5.png"]
+      },
+      {
+        "title": "给小九洗澡",
+        "emoji": "⭐",
+        "description": "在出租屋给小九第一次洗澡，可爱猫咪",
+        "date": "2024-12-02",
+        "tags": ["与圆圆","九九"],
+        "images": ["/data/achievement/images/给小九洗澡_1.png","/data/achievement/images/给小九洗澡_2.png","/data/achievement/images/给小九洗澡_3.png","/data/achievement/images/给小九洗澡_4.png"]
+      },
+      {
+        "title": "看看小九是不是聪明小猫",
+        "emoji": "⭐",
+        "description": "我俩掰开小九嘴巴看小九天花板上有几个棱来判断它是否聪明",
+        "date": "2024-11-23",
+        "tags": ["与圆圆","九九"],
+        "images": ["/data/achievement/images/看看小九是不是聪明小猫_1.png"]
+      },
+      {
+        "title": "给九九做猫饭",
+        "emoji": "⭐",
+        "description": "给九九做饭，吃的很香",
+        "date": "2024-11-12",
+        "tags": ["与圆圆","九九"],
+        "images": ["/data/achievement/images/给九九做猫饭_1.png","/data/achievement/images/给九九做猫饭_2.png","/data/achievement/images/给九九做猫饭_3.png"]
+      },
+      {
+        "title": "079组合正式成立",
+        "emoji": "⭐",
+        "description": "十一月九日晚上九点，在俸伯的一条巷子中遇到了小九，它来蹭了我的裤腿，我们两个纠结了好几分钟，最终收养了它。\r\n它太脏了，眼睛也睁不开，我们当天晚上就带它去宠物店洗了澡，很乖\r\n晚上回去后拿着鞋盒子从院子里盛了好多土当猫砂。很聪明，知道在哪里上厕所(PS : 当前晚上就在网上下单了猫笼，猫砂，猫砂盆，小猫的食物饭碗等)\r\n捡到它的后续一周，我俩都非常担心有它的主人来找它(甚至猫砂等各种和猫相关的垃圾都要扔的好远)\r\n好在它就是我们的成员",
+        "date": "2024-11-09",
+        "tags": ["重要的日子","与圆圆","九九"],
+        "images": ["/data/achievement/images/079组合正式成立_1.png","/data/achievement/images/079组合正式成立_2.png","/data/achievement/images/079组合正式成立_3.jpg","/data/achievement/images/079组合正式成立_4.jpg","/data/achievement/images/079组合正式成立_5.png","/data/achievement/images/079组合正式成立_6.png"]
+      },
+      {
+        "title": "给老爸过六十周岁生日",
+        "emoji": "⭐",
+        "description": "我去天津找的姐姐姐夫，第二天我一起开车会老家给老爸过六十周岁生日，那天老妈在值夜班没回来\r\n那天开车回村的时候雾特别大",
+        "date": "2024-11-02",
+        "tags": ["重要的日子"],
+        "images": ["/data/achievement/images/给老爸过六十周岁生日_1.png","/data/achievement/images/给老爸过六十周岁生日_2.png","/data/achievement/images/给老爸过六十周岁生日_3.png"]
       },
       {
         "title": "打卡 北京-香山",
@@ -74,11 +147,100 @@
         "tags": ["技能解锁"]
       },
       {
+        "title": "第一次过1024程序员节",
+        "emoji": "💖",
+        "description": "第一次过1024程序节，我们买了小蛋糕，吃了火锅，还点了最爱吃的茴香小油条\r\n位置 双桥万达呷哺呷哺  当时办了张卡所以经常来这里吃",
+        "date": "2024-10-24",
+        "tags": ["与圆圆"],
+        "images": ["/data/achievement/images/第一次过1024程序员节_1.png"]
+      },
+      {
+        "title": "打卡白洋淀",
+        "emoji": "📍",
+        "description": "我们一起去了白洋淀",
+        "date": "2024-10-20",
+        "tags": ["与圆圆","旅行"],
+        "images": ["/data/achievement/images/打卡白洋淀_1.jpg","/data/achievement/images/打卡白洋淀_2.png","/data/achievement/images/打卡白洋淀_3.png","/data/achievement/images/打卡白洋淀_4.png"]
+      },
+      {
+        "title": "打卡雄安新区",
+        "emoji": "📍",
+        "description": "我们一起去了雄安新区，很漂亮，但是没什么人",
+        "date": "2024-10-19",
+        "tags": ["与圆圆","旅行"],
+        "images": ["/data/achievement/images/打卡雄安新区_1.png","/data/achievement/images/打卡雄安新区_2.png","/data/achievement/images/打卡雄安新区_3.png","/data/achievement/images/打卡雄安新区_4.png","/data/achievement/images/打卡雄安新区_5.png","/data/achievement/images/打卡雄安新区_6.png"]
+      },
+      {
+        "title": "拍到了圆圆最喜欢的照片",
+        "emoji": "💖",
+        "description": "我们去常营龙湖天街看完电影在等彩蛋时候圆圆拍到了她最喜欢的照片",
+        "date": "2024-10-12",
+        "tags": ["与圆圆"],
+        "images": ["/data/achievement/images/拍到了圆圆最喜欢的照片_1.jpg","/data/achievement/images/拍到了圆圆最喜欢的照片_2.jpg"]
+      },
+      {
+        "title": "去地里给老丈人干活儿",
+        "emoji": "💖",
+        "description": "去给老丈人地里干活儿\r\n刚进门的女婿，用不尽的驴劲",
+        "date": "2024-10-04",
+        "tags": ["与圆圆"],
+        "images": ["/data/achievement/images/去地里给老丈人干活儿_1.png","/data/achievement/images/去地里给老丈人干活儿_2.png","/data/achievement/images/去地里给老丈人干活儿_3.png"]
+      },
+      {
+        "title": "带圆圆第一次见爸妈",
+        "emoji": "💖",
+        "description": "带圆圆第一次见爸妈，非常丰盛的午餐\r\n那天我们家的电线杆上还落了一对喜鹊，非常漂亮\r\n那天的晚霞也很漂亮",
+        "date": "2024-10-03",
+        "tags": ["与圆圆","重要的日子"],
+        "images": ["/data/achievement/images/带圆圆第一次见爸妈_1.png","/data/achievement/images/带圆圆第一次见爸妈_2.png","/data/achievement/images/带圆圆第一次见爸妈_3.png"]
+      },
+      {
+        "title": "第一次去看脱口秀",
+        "emoji": "💖",
+        "description": "我们第一次去看脱口秀，拍到了圆圆最喜欢的一张照片",
+        "date": "2024-09-22",
+        "tags": ["与圆圆"],
+        "images": ["/data/achievement/images/第一次去看脱口秀_1.jpg"]
+      },
+      {
+        "title": "打开青岛",
+        "emoji": "📍",
+        "description": "我们一起去了青岛，当前在青岛还下雨了，我们在民宿待了半天",
+        "date": "2024-07-21",
+        "tags": ["与圆圆","旅行"],
+        "images": ["/data/achievement/images/打开青岛_1.jpg","/data/achievement/images/打开青岛_2.jpg","/data/achievement/images/打开青岛_3.jpg","/data/achievement/images/打开青岛_4.jpg"]
+      },
+      {
+        "title": "打卡济南",
+        "emoji": "📍",
+        "description": "我们一起去了济南",
+        "date": "2024-07-20",
+        "tags": ["与圆圆","旅行"],
+        "images": ["/data/achievement/images/打卡济南_1.jpg","/data/achievement/images/打卡济南_2.jpg"]
+      },
+      {
+        "title": "打卡 天津",
+        "emoji": "📍",
+        "description": "与圆圆去游玩了 天津东疆湾，意大利风情街，五大道，还吃了很多美食",
+        "date": "2024-06-22",
+        "tags": ["与圆圆","旅行"],
+        "images": ["/data/achievement/images/打卡天津_1.jpg","/data/achievement/images/打卡天津_2.jpg"]
+      },
+      {
         "title": "与圆圆去古北水镇游玩",
         "emoji": "💖",
-        "description": "这天,我和圆圆去了古北水镇游玩,在那里登顶了司马台长城,一起看了日落,看了夜晚的无人机表演等等,非常开心.",
+        "description": "这天,我和圆圆去了古北水镇游玩,在那里登顶了司马台长城,一起看了日落,看了夜晚的无人机表演等等,非常开心.\n\n这一天我们正式确定在一起.",
         "date": "2024-06-02",
-        "tags": ["旅行","与圆圆"]
+        "tags": ["旅行","与圆圆","重要的日子"],
+        "images": ["/data/achievement/images/与圆圆去古北水镇游玩_1.jpg","/data/achievement/images/与圆圆去古北水镇游玩_2.jpg","/data/achievement/images/与圆圆去古北水镇游玩_3.jpg"]
+      },
+      {
+        "title": "我们第一次见面",
+        "emoji": "💖",
+        "description": "我们第一次见面，带了一束鲜花去见面，我在地铁站口等她，然后我们去了龙潭公园",
+        "date": "2024-05-18",
+        "tags": ["与圆圆","重要的日子"],
+        "images": ["/data/achievement/images/我们第一次见面_1.jpg","/data/achievement/images/我们第一次见面_2.jpg","/data/achievement/images/我们第一次见面_3.jpg"]
       },
       {
         "title": "骑行 北京-长安街",

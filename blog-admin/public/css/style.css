@@ -321,23 +321,57 @@ code { background: #f1f5f9; padding: 1px 5px; border-radius: 4px; font-size: 12p
 .achi-imgs img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
 .achi-actions { display: flex; flex-direction: column; gap: 6px; }
 
-.img-list { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
-.img-item { position: relative; }
-.img-item img { width: 96px; height: 96px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
-.img-remove {
+.img-list { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; align-items: flex-start; }
+.img-item {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 6px 4px;
+    transition: opacity .15s, border-color .15s;
+}
+.img-item[draggable="true"] { cursor: grab; }
+.img-item.dragging { opacity: .45; }
+.img-item.drag-over { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, .18); }
+.img-item.is-temp { border-color: #93c5fd; background: #f0f7ff; }
+.img-item img { width: 90px; height: 90px; object-fit: cover; border-radius: 6px; display: block; }
+.img-badge {
     position: absolute;
     top: -7px;
-    right: -7px;
+    left: -7px;
+    padding: 1px 7px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 10px;
+    line-height: 16px;
+}
+.img-name {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 4px;
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.img-tools { display: flex; justify-content: center; gap: 4px; margin-top: 4px; }
+.img-move, .img-remove {
     width: 20px;
     height: 20px;
-    border-radius: 50%;
+    padding: 0;
     border: none;
-    background: var(--danger);
-    color: #fff;
-    cursor: pointer;
-    font-size: 12px;
+    border-radius: 4px;
+    font-size: 11px;
     line-height: 1;
+    cursor: pointer;
 }
+.img-move { background: #eef2ff; color: #3730a3; }
+.img-move:hover:not(:disabled) { background: var(--primary); color: #fff; }
+.img-move:disabled { opacity: .35; cursor: not-allowed; }
+.img-remove { background: var(--danger); color: #fff; }
+.img-remove:hover { background: var(--danger-dark); }
 
 /* ---------- 其他 ---------- */
 .loading { padding: 40px; text-align: center; color: var(--muted); }

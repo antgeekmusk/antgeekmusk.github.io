@@ -22,6 +22,24 @@ function navigate() {
     def.render(document.getElementById('content'));
 }
 
+/**
+ * 原地重新渲染当前路由页面（不整页刷新），并尽量保持内容区滚动位置。
+ * 供「保存 / 删除 / 新增」等操作后刷新列表使用，避免滚动条回到顶部。
+ */
+async function refreshCurrentRoute() {
+    const hash = location.hash.replace(/^#\/?/, '');
+    const name = hash.split('?')[0] || 'articles';
+    const def = routes[name] || routes.articles;
+    const container = document.getElementById('content');
+    const scrollTop = container.scrollTop;
+    try {
+        await def.render(container);
+    } finally {
+        // 渲染期间容器内容被替换，等布局完成后恢复原滚动位置
+        requestAnimationFrame(() => { container.scrollTop = scrollTop; });
+    }
+}
+
 window.addEventListener('hashchange', navigate);
 window.addEventListener('DOMContentLoaded', () => {
     // 侧边栏展示数据目录

@@ -15,7 +15,7 @@ registerRoute('achievements', {
                     body: { year, title: '占位足迹，请编辑', date: `${year}-01-01`, description: '', emoji: '⭐', tags: [] },
                 });
                 toast('年份已创建');
-                location.reload();
+                await refreshCurrentRoute();
             } catch (e) { toast(e.message, 'error'); }
         };
         el.appendChild(btn);
@@ -77,7 +77,7 @@ registerRoute('achievements', {
                 try {
                     await api(`/achievements/${btn.dataset.year}/${btn.dataset.del}`, { method: 'DELETE' });
                     toast('已删除');
-                    location.reload();
+                    await refreshCurrentRoute();
                 } catch (e) { toast(e.message, 'error'); }
             };
         });
@@ -91,7 +91,11 @@ async function openAchievementEditor({ year, item, index }) {
     let tagSuggest = [];
     try { tagSuggest = (await api('/tags')).map((t) => t.name); } catch (e) { /* ignore */ }
 
-    const { box } = openModal(`
+    // images 元素：已有图片为 URL 字符串；临时图片为 { blob, preview, name }，仅保存在内存中
+    let images = [...(base.images || [])];
+    const objectUrls = new Set();
+
+    const { box, close } = openModal(`
         <div class="modal-head">${isNew ? `新增足迹（${esc(year)}）` : '编辑足迹'}</div>
         <div class="modal-body form-grid">
             <div class="field"><span>标题 *</span><input class="input" id="ac-title" value="${esc(base.title)}"></div>
@@ -101,7 +105,10 @@ async function openAchievementEditor({ year, item, index }) {
             <div class="field field-full"><span>描述（支持 Markdown）</span><textarea class="input" id="ac-desc" rows="4">${esc(base.description)}</textarea></div>
             <div class="field field-full"><span>图片</span>
                 <div class="img-list" id="ac-images"></div>
-                <button class="btn btn-sm" id="ac-upload">+ 上传图片</button>
+                <div class="field-actions">
+                    <button class="btn btn-sm" id="ac-upload" type="button">+ 添加图片</button>
+                </div>
+                <div class="hint">💡 支持直接粘贴剪贴板图片（Ctrl/Cmd+V）；可拖拽或用 ◀ ▶ 调整顺序。图片只在点击「保存」时才会真正写入服务器，中途删除不会残留文件；保存后按「标题_序号」命名</div>
                 <input type="file" id="ac-file" accept="image/*" multiple hidden>
             </div>
         </div>
@@ -109,20 +116,95 @@ async function openAchievementEditor({ year, item, index }) {
             <button class="btn" data-close>取消</button>
             <button class="btn btn-primary" id="ac-save">保存</button>
         </div>
-    `, { width: '720px' });
+    `, {
+        width: '720px',
+        // 弹窗关闭时：移除粘贴监听 + 释放临时图片的预览 URL
+        onClose: () => {
+            box.removeEventListener('paste', onPaste);
+            objectUrls.forEach((u) => URL.revokeObjectURL(u));
+            objectUrls.clear();
+        },
+    });
 
-    let images = [...(base.images || [])];
     const imgList = box.querySelector('#ac-images');
+    const uploadBtn = box.querySelector('#ac-upload');
+    const saveBtn = box.querySelector('#ac-save');
+
+    const isTemp = (it) => it && typeof it === 'object';
+    const srcOf = (it) => (isTemp(it) ? it.preview : it);
+    const nameOf = (it) => (isTemp(it) ? (it.name || '待上传图片') : imageName(it));
+
+    /** 已有图片的文件名 */
+    const imageName = (url) => {
+        let name = String(url).split('/').pop() || '';
+        try { name = decodeURIComponent(name); } catch (e) { /* 保留原名 */ }
+        return name;
+    };
+
+    /** 移除第 idx 张图片，并释放临时图片的内存 */
+    const removeImage = (idx) => {
+        const [removed] = images.splice(idx, 1);
+        if (isTemp(removed)) {
+            URL.revokeObjectURL(removed.preview);
+            objectUrls.delete(removed.preview);
+        }
+        renderImages();
+    };
+
     const renderImages = () => {
         imgList.innerHTML = images.length
-            ? images.map((im, idx) => `
-                <div class="img-item">
-                    <img src="${esc(im)}" alt="">
-                    <button class="img-remove" data-idx="${idx}">×</button>
-                </div>`).join('')
+            ? images.map((it, idx) => {
+                const name = nameOf(it);
+                return `
+                    <div class="img-item ${isTemp(it) ? 'is-temp' : ''}" draggable="true" data-idx="${idx}">
+                        <img src="${esc(srcOf(it))}" alt="" draggable="false">
+                        ${isTemp(it) ? '<span class="img-badge">待保存</span>' : ''}
+                        <div class="img-name" title="${esc(name)}">${esc(name)}</div>
+                        <div class="img-tools">
+                            <button class="img-move" type="button" data-move="-1" data-idx="${idx}" ${idx === 0 ? 'disabled' : ''} title="前移">◀</button>
+                            <button class="img-move" type="button" data-move="1" data-idx="${idx}" ${idx === images.length - 1 ? 'disabled' : ''} title="后移">▶</button>
+                            <button class="img-remove" type="button" data-idx="${idx}" title="删除">×</button>
+                        </div>
+                    </div>`;
+            }).join('')
             : '<span class="muted">暂无图片</span>';
+
+        // 拖拽调整顺序
+        let dragIdx = null;
+        imgList.querySelectorAll('.img-item[draggable="true"]').forEach((el) => {
+            el.addEventListener('dragstart', () => {
+                dragIdx = Number(el.dataset.idx);
+                el.classList.add('dragging');
+            });
+            el.addEventListener('dragend', () => {
+                el.classList.remove('dragging');
+                dragIdx = null;
+            });
+            el.addEventListener('dragover', (e) => { e.preventDefault(); el.classList.add('drag-over'); });
+            el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+            el.addEventListener('drop', (e) => {
+                e.preventDefault();
+                el.classList.remove('drag-over');
+                const to = Number(el.dataset.idx);
+                if (dragIdx === null || dragIdx === to || dragIdx < 0 || dragIdx >= images.length) return;
+                const [moved] = images.splice(dragIdx, 1);
+                images.splice(to, 0, moved);
+                renderImages();
+            });
+        });
+
+        // 按钮调整顺序 / 删除
+        imgList.querySelectorAll('.img-move').forEach((b) => {
+            b.onclick = () => {
+                const i = Number(b.dataset.idx);
+                const to = i + Number(b.dataset.move);
+                if (to < 0 || to >= images.length) return;
+                [images[i], images[to]] = [images[to], images[i]];
+                renderImages();
+            };
+        });
         imgList.querySelectorAll('.img-remove').forEach((b) => {
-            b.onclick = () => { images.splice(Number(b.dataset.idx), 1); renderImages(); };
+            b.onclick = () => removeImage(Number(b.dataset.idx));
         });
     };
     renderImages();
@@ -130,36 +212,92 @@ async function openAchievementEditor({ year, item, index }) {
     const chipsTags = chipsInput({ value: base.tags, suggestions: tagSuggest, placeholder: '输入后回车' });
     box.querySelector('#ac-tags').appendChild(chipsTags);
 
-    const fileInput = box.querySelector('#ac-file');
-    box.querySelector('#ac-upload').onclick = () => fileInput.click();
-    fileInput.onchange = async () => {
-        const files = [...fileInput.files];
+    /** 添加图片（文件选择 / 剪贴板共用）：仅暂存内存，不写入服务器 */
+    const addImages = (files) => {
+        const MAX_SIZE = 20 * 1024 * 1024;
+        const added = [];
+        for (const f of files) {
+            if (!f.type.startsWith('image/')) continue;
+            if (f.size > MAX_SIZE) {
+                toast(`「${f.name || '图片'}」超过 20MB，已跳过`, 'warning');
+                continue;
+            }
+            const preview = URL.createObjectURL(f);
+            objectUrls.add(preview);
+            added.push({ blob: f, preview, name: f.name || '' });
+        }
+        if (!added.length) return;
+        images.push(...added);
+        renderImages();
+        toast(`已添加 ${added.length} 张图片，点击「保存」后才会真正上传`);
+    };
+
+    // 剪贴板粘贴图片（截图 / 复制图片文件均可）
+    const onPaste = (e) => {
+        if (!e.clipboardData) return;
+        const files = [];
+        for (const item of e.clipboardData.items || []) {
+            if (item.kind === 'file' && item.type.startsWith('image/')) {
+                const f = item.getAsFile();
+                if (f) files.push(f);
+            }
+        }
+        for (const f of e.clipboardData.files || []) {
+            if (f.type.startsWith('image/') && !files.includes(f)) files.push(f);
+        }
         if (!files.length) return;
-        try {
-            const saved = await uploadImages('/achievements/images', files);
-            images.push(...saved.map((f) => f.url));
-            renderImages();
-            toast(`已上传 ${saved.length} 张图片`);
-        } catch (e) { toast('上传失败: ' + e.message, 'error'); }
+        e.preventDefault();
+        addImages(files);
+    };
+    box.addEventListener('paste', onPaste);
+
+    const fileInput = box.querySelector('#ac-file');
+    uploadBtn.onclick = () => fileInput.click();
+    fileInput.onchange = () => {
+        addImages([...fileInput.files]);
         fileInput.value = '';
     };
 
-    box.querySelector('#ac-save').onclick = async () => {
-        const payload = {
-            year,
-            title: box.querySelector('#ac-title').value.trim(),
-            emoji: box.querySelector('#ac-emoji').value.trim(),
-            date: box.querySelector('#ac-date').value,
-            description: box.querySelector('#ac-desc').value,
-            tags: JSON.parse(chipsTags.dataset.value || '[]'),
-            images,
-        };
-        if (!payload.title) { toast('请填写标题', 'warning'); return; }
+    /** 组装保存请求：最终图片顺序里，临时图片用 __temp__k 占位，文件按 k 顺序放入 multipart */
+    const buildSaveBody = () => {
+        const fd = new FormData();
+        const ordered = [];
+        const tempFiles = [];
+        for (const it of images) {
+            if (isTemp(it)) {
+                const k = tempFiles.length;
+                tempFiles.push(it.blob);
+                ordered.push(`__temp__${k}`);
+            } else {
+                ordered.push(it);
+            }
+        }
+        fd.append('year', String(year));
+        fd.append('title', box.querySelector('#ac-title').value.trim());
+        fd.append('emoji', box.querySelector('#ac-emoji').value.trim());
+        fd.append('date', box.querySelector('#ac-date').value);
+        fd.append('description', box.querySelector('#ac-desc').value);
+        fd.append('tags', chipsTags.dataset.value || '[]');
+        fd.append('images', JSON.stringify(ordered));
+        tempFiles.forEach((b, k) => fd.append('files', b, b.name || `pasted-${k}.png`));
+        return fd;
+    };
+
+    saveBtn.onclick = async () => {
+        if (!box.querySelector('#ac-title').value.trim()) { toast('请填写标题', 'warning'); return; }
+        saveBtn.disabled = true;
+        saveBtn.textContent = '保存中…';
         try {
-            if (isNew) await api('/achievements', { method: 'POST', body: payload });
-            else await api(`/achievements/${year}/${index}`, { method: 'PUT', body: payload });
+            const body = buildSaveBody();
+            if (isNew) await api('/achievements', { method: 'POST', body });
+            else await api(`/achievements/${year}/${index}`, { method: 'PUT', body });
             toast('已保存');
-            location.reload();
-        } catch (e) { toast(e.message, 'error'); }
+            close(); // 关闭编辑弹窗
+            await refreshCurrentRoute(); // 原地刷新列表，保持滚动位置
+        } catch (e) {
+            toast(e.message, 'error');
+            saveBtn.disabled = false;
+            saveBtn.textContent = '保存';
+        }
     };
 }

@@ -15,7 +15,7 @@ registerRoute('portfolio', {
                     body: { year, title: '占位作品，请编辑', date: `${year}-01-01`, description: '', emoji: '💼', route: '', tags: [] },
                 });
                 toast('年份已创建');
-                location.reload();
+                await refreshCurrentRoute();
             } catch (e) { toast(e.message, 'error'); }
         };
         el.appendChild(btn);
@@ -77,7 +77,7 @@ registerRoute('portfolio', {
                 try {
                     await api(`/portfolio/${btn.dataset.year}/${btn.dataset.del}`, { method: 'DELETE' });
                     toast('已删除');
-                    location.reload();
+                    await refreshCurrentRoute();
                 } catch (e) { toast(e.message, 'error'); }
             };
         });
@@ -91,7 +91,7 @@ async function openPortfolioEditor({ year, item, index }) {
     let tagSuggest = [];
     try { tagSuggest = (await api('/tags')).map((t) => t.name); } catch (e) { /* ignore */ }
 
-    const { box } = openModal(`
+    const { box, close } = openModal(`
         <div class="modal-head">${isNew ? `新增作品（${esc(year)}）` : '编辑作品'}</div>
         <div class="modal-body form-grid">
             <div class="field"><span>标题 *</span><input class="input" id="pf-title" value="${esc(base.title)}"></div>
@@ -115,12 +115,20 @@ async function openPortfolioEditor({ year, item, index }) {
 
     let images = [...(base.images || [])];
     const imgList = box.querySelector('#pf-images');
+    const imageName = (url) => {
+        let name = String(url).split('/').pop() || '';
+        try { name = decodeURIComponent(name); } catch (e) { /* 保留原名 */ }
+        return name;
+    };
     const renderImages = () => {
         imgList.innerHTML = images.length
             ? images.map((im, idx) => `
                 <div class="img-item">
-                    <img src="${esc(im)}" alt="">
-                    <button class="img-remove" data-idx="${idx}">×</button>
+                    <img src="${esc(im)}" alt="" draggable="false">
+                    <div class="img-name" title="${esc(imageName(im))}">${esc(imageName(im))}</div>
+                    <div class="img-tools">
+                        <button class="img-remove" data-idx="${idx}">×</button>
+                    </div>
                 </div>`).join('')
             : '<span class="muted">暂无图片</span>';
         imgList.querySelectorAll('.img-remove').forEach((b) => {
@@ -162,7 +170,8 @@ async function openPortfolioEditor({ year, item, index }) {
             if (isNew) await api('/portfolio', { method: 'POST', body: payload });
             else await api(`/portfolio/${year}/${index}`, { method: 'PUT', body: payload });
             toast('已保存');
-            location.reload();
+            close(); // 关闭编辑弹窗
+            await refreshCurrentRoute(); // 原地刷新列表，保持滚动位置
         } catch (e) { toast(e.message, 'error'); }
     };
 }

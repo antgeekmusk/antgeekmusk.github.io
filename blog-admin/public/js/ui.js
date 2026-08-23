@@ -16,8 +16,8 @@ function toast(message, type = 'success', ms = 2600) {
     setTimeout(() => el.remove(), ms + 320);
 }
 
-/** 打开弹窗，返回 { box, close } */
-function openModal(html, { width = '800px' } = {}) {
+/** 打开弹窗，返回 { box, close }；onClose 在弹窗关闭时回调（用于清理事件监听等） */
+function openModal(html, { width = '800px', onClose = null } = {}) {
     const mask = document.getElementById('modal-mask');
     const box = document.getElementById('modal-box');
     box.innerHTML = html;
@@ -27,6 +27,7 @@ function openModal(html, { width = '800px' } = {}) {
     const close = () => {
         mask.classList.remove('open');
         document.body.classList.remove('no-scroll');
+        if (typeof onClose === 'function') onClose();
     };
     mask.onclick = (e) => { if (e.target === mask) close(); };
     box.querySelectorAll('[data-close]').forEach((btn) => btn.addEventListener('click', close));
