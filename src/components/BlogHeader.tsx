@@ -90,7 +90,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
                 <Content className={"h-middle"}>
                     <ul>
                         <li onClick={handleLogoClick}>博客</li>
-                        <li onClick={handleAboutMeClick}>关于我</li>
+                        <li onClick={handleAboutMeClick}>足迹</li>
                         <li onClick={handlePortfolioClick}>作品集</li>
                     </ul>
                 </Content>
@@ -105,7 +105,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({colorChangeFlag = true}) => {
                     >
                         <div className={"h-mobile-menu-nav"}>
                             <p onClick={handleLogoClick}>博客</p>
-                            <p onClick={handleAboutMeClick}>关于我</p>
+                            <p onClick={handleAboutMeClick}>足迹</p>
                             <p onClick={handlePortfolioClick}>作品集</p>
                         </div>
                         <br/><br/><br/><br/>

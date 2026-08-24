@@ -4,6 +4,7 @@
 
 # 依赖（忽略所有层级的 node_modules，包括 blog-admin/node_modules）
 node_modules/
+.npm-cache/
 
 # 测试
 coverage/

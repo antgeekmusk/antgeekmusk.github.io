@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/AboutMe",
-        element: <AboutMe />, // 关于我页面
+        element: <AboutMe />, // 足迹页面（历史路由 /AboutMe 保留）
     },
     {
         path: "/Portfolio",

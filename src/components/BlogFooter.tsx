@@ -16,7 +16,7 @@ const BlogFooter: React.FC = () => {
                 </div>
                 <div className="footer-section footer-links">
                     <a href="/" className="footer-link">博客</a>
-                    <a href="/AboutMe" className="footer-link">关于我</a>
+                    <a href="/AboutMe" className="footer-link">足迹</a>
                     <a href="/Portfolio" className="footer-link">作品集</a>
                 </div>
                 <div className="footer-section footer-social">

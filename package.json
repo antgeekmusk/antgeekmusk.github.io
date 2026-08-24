@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/compress-images.mjs",
     "preview": "vite preview",
     "admin": "npm --prefix blog-admin start",
     "predeploy": "npm run build",
@@ -45,7 +45,8 @@
       "react-app",
       "react-app/jest"
     ]
-  },  "browserslist": {
+  },
+  "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
@@ -56,5 +57,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jimp": "^1.6.1"
   }
 }

@@ -3,6 +3,7 @@ import { Timeline, Card, Row, Col, Layout, Tag, Select, Modal } from 'antd';
 import { CalendarOutlined, PlusOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import BlogHeader from '../../components/BlogHeader';
+import SmartImage from '../../components/SmartImage/SmartImage';
 import '../../styles/AboutMe.css';
 import FloatButtonTools from "../../components/FloatButtonTools";
 import BlogFooter from "../../components/BlogFooter";
@@ -35,7 +36,6 @@ const addBaseTag = () => {
 
 const AboutMe: React.FC = () => {
     const [achievements, setAchievements] = useState<Achievement[]>([]);
-    const [myInfo, setMyInfo] = useState<string>('');
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
     const [allTags, setAllTags] = useState<string[]>([]);
     const [detailItem, setDetailItem] = useState<AchievementItem | null>(null);
@@ -57,9 +57,6 @@ const AboutMe: React.FC = () => {
                 });
                 setAllTags(Array.from(tags));
             });
-        fetch('/data/achievement/myInfo.md')
-            .then(response => response.text())
-            .then(text => setMyInfo(text));
     }, []);
 
     const filteredAchievements = selectedTag
@@ -108,11 +105,6 @@ const AboutMe: React.FC = () => {
                 <div className="bg-blob bg-blob-1"/>
                 <div className="bg-blob bg-blob-2"/>
 
-                <div className="self-introduction">
-                    <h1>我的介绍</h1>
-                    <ReactMarkdown>{myInfo}</ReactMarkdown>
-                </div>
-
                 <div className="achievement-wall" ref={wallRef}>
                     <div className="wall-header">
                         <h1 className="wall-title">
@@ -157,8 +149,8 @@ const AboutMe: React.FC = () => {
                                                 {item.images && item.images.length > 0 && (
                                                     <div className="card-images">
                                                         <div className="card-img-box">
-                                                            <img src={item.images[0]}
-                                                                 alt={`${item.title} 图片`}/>
+                                                            <SmartImage src={item.images[0]}
+                                                                        alt={`${item.title} 图片`}/>
                                                             <div className="card-img-shine"/>
                                                             {item.images.length > 1 && (
                                                                 <div className="img-overlay">
@@ -200,7 +192,7 @@ const AboutMe: React.FC = () => {
                             {detailItem.images && detailItem.images.length > 0 && (
                                 <div className="detail-images">
                                     {detailItem.images.map((img, idx) => (
-                                        <img key={idx} src={img} alt={`${detailItem.title} 图片 ${idx + 1}`}/>
+                                        <SmartImage key={idx} src={img} alt={`${detailItem.title} 图片 ${idx + 1}`}/>
                                     ))}
                                 </div>
                             )}

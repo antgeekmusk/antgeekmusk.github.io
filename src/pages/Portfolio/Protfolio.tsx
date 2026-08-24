@@ -3,6 +3,7 @@ import { Timeline, Card, Row, Col, Layout, Tag, Select, Modal } from 'antd';
 import { CalendarOutlined, PlusOutlined, CodeOutlined } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import BlogHeader from '../../components/BlogHeader';
+import SmartImage from '../../components/SmartImage/SmartImage';
 import '../../styles/Portfolio.css';
 import FloatButtonTools from "../../components/FloatButtonTools";
 import BlogFooter from "../../components/BlogFooter";
@@ -162,8 +163,8 @@ const PortfolioPage: React.FC = () => {
                                                 {item.images && item.images.length > 0 && (
                                                     <div className="card-images">
                                                         <div className="card-img-box">
-                                                            <img src={item.images[0]}
-                                                                 alt={`${item.title} 图片`}/>
+                                                            <SmartImage src={item.images[0]}
+                                                                        alt={`${item.title} 图片`}/>
                                                             <div className="card-img-shine"/>
                                                             {item.images.length > 1 && (
                                                                 <div className="img-overlay">
@@ -212,7 +213,7 @@ const PortfolioPage: React.FC = () => {
                             {detailItem.images && detailItem.images.length > 0 && (
                                 <div className="detail-images">
                                     {detailItem.images.map((img, idx) => (
-                                        <img key={idx} src={img} alt={`${detailItem.title} 图片 ${idx + 1}`}/>
+                                        <SmartImage key={idx} src={img} alt={`${detailItem.title} 图片 ${idx + 1}`}/>
                                     ))}
                                 </div>
                             )}

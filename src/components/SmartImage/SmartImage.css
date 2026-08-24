@@ -1,0 +1,77 @@
+/* ==================== 智能图片（加载动画 / 失败占位） ==================== */
+.smart-img {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 60px;
+}
+
+/* 卡片首图占位高度（与 .card-img-box img 的 150px 一致，加载前撑起骨架屏） */
+.card-img-box .smart-img {
+    min-height: 150px;
+}
+
+/* 详情弹窗图片占位高度（加载前撑起骨架屏） */
+.detail-images .smart-img {
+    min-height: 220px;
+}
+
+/* 骨架屏闪烁动画 */
+.smart-img-shimmer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #eef1f6 25%, #f7f9fc 50%, #eef1f6 75%);
+    background-size: 300% 100%;
+    animation: shimmerSlide 1.4s ease-in-out infinite;
+    z-index: 1;
+}
+
+.smart-img-spinner {
+    font-size: 22px;
+    color: #a5b4fc;
+    animation: spinPulse 1.2s ease-in-out infinite;
+}
+
+/* 加载失败占位 */
+.smart-img-error {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #94a3b8;
+    font-size: 12px;
+    background: #f1f5f9;
+    z-index: 1;
+}
+.smart-img-error svg {
+    font-size: 26px;
+}
+
+/* 图片本体：未加载完成时隐藏，加载完成后淡入 */
+.smart-img-el {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+.smart-img-el.is-loaded {
+    opacity: 1;
+}
+
+@keyframes shimmerSlide {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+@keyframes spinPulse {
+    0%, 100% { transform: rotate(0deg) scale(1); opacity: .7; }
+    50% { transform: rotate(180deg) scale(1.15); opacity: 1; }
+}
