@@ -1,5 +1,30 @@
 /* ============ 足迹管理 ============ */
 
+/** emoji 预设池（已用过的按使用次数排最前，其余按此池补全） */
+const EMOJI_PRESET = [
+    // 重要日子 / 婚礼
+    '💍','👰','🤵','💐','🎁','❤️','💖','🥰',
+    // 旅行 / 打卡
+    '📍','✈️','🏔️','⛰️','🌊','🌄','🎢','🗺️','🚌','🚗',
+    // 运动 / 技能 / 骑行
+    '🚴','🏃','🏊','🎿','⛷️','⚽','🏀','🎯','💪','🛠️','🔧',
+    // 工作 / 代码
+    '🧑‍💻','👩‍💻','💻','🖥️','📈','📊','⚙️','🧪','🔬','📝',
+    // 学习 / 毕业
+    '📚','🎓','📖','✏️','🏅',
+    // 日常 / 情绪 / 娱乐
+    '🎉','🥳','⭐','🌟','🏆','🎖️','🎬','📽️','🎨','🎮','🎧','🎹',
+    '😊','😄','🍚','🍜','🍢','🍲','☕','🍺','🍰',
+];
+
+/** 生成 emoji 选项：已用过的按使用次数降序排前，其余按预设池补全（去重） */
+function buildEmojiOptions(usage) {
+    const used = Object.keys(usage).sort((a, b) => usage[b] - usage[a]);
+    const seen = new Set(used);
+    const rest = EMOJI_PRESET.filter((e) => !seen.has(e));
+    return [...used, ...rest];
+}
+
 registerRoute('achievements', {
     title: '足迹管理',
     renderActions(el) {
@@ -35,6 +60,14 @@ registerRoute('achievements', {
             return;
         }
 
+        // 统计所有足迹中用过的 emoji，常用排最前
+        const emojiUsage = {};
+        years.forEach((y) => (y.items || []).forEach((it) => {
+            const e = String(it.emoji || '').trim();
+            if (e) emojiUsage[e] = (emojiUsage[e] || 0) + 1;
+        }));
+        const emojiOptions = buildEmojiOptions(emojiUsage);
+
         container.innerHTML = years.map((year) => `
             <div class="panel year-panel">
                 <div class="year-head">
@@ -60,13 +93,13 @@ registerRoute('achievements', {
             </div>`).join('');
 
         container.querySelectorAll('[data-add-year]').forEach((btn) => {
-            btn.onclick = () => openAchievementEditor({ year: btn.dataset.addYear, item: null });
+            btn.onclick = () => openAchievementEditor({ year: btn.dataset.addYear, item: null, emojiOptions });
         });
         container.querySelectorAll('[data-edit]').forEach((btn) => {
             btn.onclick = () => {
                 const year = years.find((y) => y.year === btn.dataset.year);
                 if (year && year.items[Number(btn.dataset.edit)]) {
-                    openAchievementEditor({ year: btn.dataset.year, item: year.items[Number(btn.dataset.edit)], index: Number(btn.dataset.edit) });
+                    openAchievementEditor({ year: btn.dataset.year, item: year.items[Number(btn.dataset.edit)], index: Number(btn.dataset.edit), emojiOptions });
                 }
             };
         });
@@ -85,7 +118,7 @@ registerRoute('achievements', {
 });
 
 /** 足迹编辑器（新建 / 编辑共用） */
-async function openAchievementEditor({ year, item, index }) {
+async function openAchievementEditor({ year, item, index, emojiOptions = [] }) {
     const isNew = !item;
     const base = item || { title: '', emoji: '⭐', description: '', date: `${year}-01-01`, tags: [], images: [] };
     let tagSuggest = [];
@@ -99,7 +132,12 @@ async function openAchievementEditor({ year, item, index }) {
         <div class="modal-head">${isNew ? `新增足迹（${esc(year)}）` : '编辑足迹'}</div>
         <div class="modal-body form-grid">
             <div class="field"><span>标题 *</span><input class="input" id="ac-title" value="${esc(base.title)}"></div>
-            <div class="field"><span>Emoji</span><input class="input" id="ac-emoji" value="${esc(base.emoji || '')}"></div>
+            <div class="field field-full"><span>Emoji（点击选择，常用的排在最前）</span>
+                <div class="emoji-picker" id="ac-emoji-picker">
+                    ${(emojiOptions.includes(base.emoji || '⭐') ? emojiOptions : [base.emoji || '⭐', ...emojiOptions]).map((e) => `<button type="button" class="emoji-option${e === (base.emoji || '⭐') ? ' active' : ''}" data-emoji="${esc(e)}">${e}</button>`).join('')}
+                </div>
+                <div class="emoji-custom"><span class="muted">自定义</span><input class="input" id="ac-emoji" value="${esc(base.emoji || '⭐')}" maxlength="12"></div>
+            </div>
             <div class="field"><span>日期</span><input class="input" id="ac-date" type="date" value="${esc(base.date)}"></div>
             <div class="field"><span>Tag</span><div id="ac-tags"></div></div>
             <div class="field field-full"><span>描述（支持 Markdown）</span><textarea class="input" id="ac-desc" rows="4">${esc(base.description)}</textarea></div>
@@ -129,6 +167,20 @@ async function openAchievementEditor({ year, item, index }) {
     const imgList = box.querySelector('#ac-images');
     const uploadBtn = box.querySelector('#ac-upload');
     const saveBtn = box.querySelector('#ac-save');
+
+    // emoji 选择器交互
+    const emojiInput = box.querySelector('#ac-emoji');
+    const emojiBtns = [...box.querySelectorAll('#ac-emoji-picker .emoji-option')];
+    emojiBtns.forEach((b) => {
+        b.onclick = () => {
+            emojiInput.value = b.dataset.emoji;
+            emojiBtns.forEach((x) => x.classList.toggle('active', x === b));
+        };
+    });
+    emojiInput.addEventListener('input', () => {
+        const v = emojiInput.value.trim();
+        emojiBtns.forEach((x) => x.classList.toggle('active', x.dataset.emoji === v));
+    });
 
     const isTemp = (it) => it && typeof it === 'object';
     const srcOf = (it) => (isTemp(it) ? it.preview : it);

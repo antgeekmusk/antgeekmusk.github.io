@@ -35,6 +35,14 @@ registerRoute('portfolio', {
             return;
         }
 
+        // 统计所有作品中用过的 emoji，常用排最前
+        const emojiUsage = {};
+        years.forEach((y) => (y.items || []).forEach((it) => {
+            const e = String(it.emoji || '').trim();
+            if (e) emojiUsage[e] = (emojiUsage[e] || 0) + 1;
+        }));
+        const emojiOptions = buildEmojiOptions(emojiUsage);
+
         container.innerHTML = years.map((year) => `
             <div class="panel year-panel">
                 <div class="year-head">
@@ -60,13 +68,13 @@ registerRoute('portfolio', {
             </div>`).join('');
 
         container.querySelectorAll('[data-add-year]').forEach((btn) => {
-            btn.onclick = () => openPortfolioEditor({ year: btn.dataset.addYear, item: null });
+            btn.onclick = () => openPortfolioEditor({ year: btn.dataset.addYear, item: null, emojiOptions });
         });
         container.querySelectorAll('[data-edit]').forEach((btn) => {
             btn.onclick = () => {
                 const year = years.find((y) => y.year === btn.dataset.year);
                 if (year && year.items[Number(btn.dataset.edit)]) {
-                    openPortfolioEditor({ year: btn.dataset.year, item: year.items[Number(btn.dataset.edit)], index: Number(btn.dataset.edit) });
+                    openPortfolioEditor({ year: btn.dataset.year, item: year.items[Number(btn.dataset.edit)], index: Number(btn.dataset.edit), emojiOptions });
                 }
             };
         });
@@ -85,7 +93,7 @@ registerRoute('portfolio', {
 });
 
 /** 作品编辑器（新建 / 编辑共用，含 route 路由字段） */
-async function openPortfolioEditor({ year, item, index }) {
+async function openPortfolioEditor({ year, item, index, emojiOptions = [] }) {
     const isNew = !item;
     const base = item || { title: '', emoji: '💼', description: '', date: `${year}-01-01`, route: '', tags: [], images: [] };
     let tagSuggest = [];
@@ -95,7 +103,12 @@ async function openPortfolioEditor({ year, item, index }) {
         <div class="modal-head">${isNew ? `新增作品（${esc(year)}）` : '编辑作品'}</div>
         <div class="modal-body form-grid">
             <div class="field"><span>标题 *</span><input class="input" id="pf-title" value="${esc(base.title)}"></div>
-            <div class="field"><span>Emoji</span><input class="input" id="pf-emoji" value="${esc(base.emoji || '')}"></div>
+            <div class="field field-full"><span>Emoji（点击选择，常用的排在最前）</span>
+                <div class="emoji-picker" id="pf-emoji-picker">
+                    ${(emojiOptions.includes(base.emoji || '💼') ? emojiOptions : [base.emoji || '💼', ...emojiOptions]).map((e) => `<button type="button" class="emoji-option${e === (base.emoji || '💼') ? ' active' : ''}" data-emoji="${esc(e)}">${e}</button>`).join('')}
+                </div>
+                <div class="emoji-custom"><span class="muted">自定义</span><input class="input" id="pf-emoji" value="${esc(base.emoji || '💼')}" maxlength="12"></div>
+            </div>
             <div class="field"><span>日期</span><input class="input" id="pf-date" type="date" value="${esc(base.date)}"></div>
             <div class="field"><span>页面路由 route</span><input class="input" id="pf-route" placeholder="/practice/tic-tac-toe" value="${esc(base.route || '')}"></div>
             <div class="field"><span>Tag</span><div id="pf-tags"></div></div>
@@ -112,6 +125,20 @@ async function openPortfolioEditor({ year, item, index }) {
             <button class="btn btn-primary" id="pf-save">保存</button>
         </div>
     `, { width: '720px' });
+
+    // emoji 选择器交互
+    const emojiInput = box.querySelector('#pf-emoji');
+    const emojiBtns = [...box.querySelectorAll('#pf-emoji-picker .emoji-option')];
+    emojiBtns.forEach((b) => {
+        b.onclick = () => {
+            emojiInput.value = b.dataset.emoji;
+            emojiBtns.forEach((x) => x.classList.toggle('active', x === b));
+        };
+    });
+    emojiInput.addEventListener('input', () => {
+        const v = emojiInput.value.trim();
+        emojiBtns.forEach((x) => x.classList.toggle('active', x.dataset.emoji === v));
+    });
 
     let images = [...(base.images || [])];
     const imgList = box.querySelector('#pf-images');
